@@ -1,0 +1,231 @@
+---
+title: "Developing a purchasing impacts app based on USEEIO impact intensities"
+output: html_notebook
+---
+
+by [Martin Brown](mailto::Martin.Brown@state.or.us)
+
+### Introduction
+
+In this R Markdown workbook I'm going to develop a Shiny app that takes spending data, expressed in BEA/NAICS categories, and converts those data to estimated supply chain (Scope 3) environmental impacts, based on impact intensities found in the USEEIO model.
+
+For the time being the only impact category reported on will be greenhouse gas emissions, because the EPA has recently published a [convenient set of impact intensities for greenhouse gases](https://cfpub.epa.gov/si/si_public_record_Report.cfm?dirEntryId=349324&Lab=CESER).  But I will try to structure it so that if other impact categories become doable in the future, they can be added easily.
+
+### Tracks of work
+
+To make the app, I'll have to combine several sets of data and tracks of work.
+
+To output estimated supply chain emissions, based on dollars expended, I need to combine:
+
+* emissions intensity data, from the EPA's publications.  This is easy to download but needs to be filtered and reformed before it's used in the app.
+* global warming potential data.  I definitely want to give some options here.
+* spending data, from Oregon or any other source, but in categories compatible with the EPA's emissions intensities
+
+So in general, impact=spending in dollars x emissions intensity (tons emitted/dollar) x global warming potential (unitless).
+
+But to make that happen in the app,
+
+* the emissions intensity data needs to be in a filtered tidy data frame
+* the spending data has to be uploaded and checked for compatibility (inside the app)
+* a number of global warming potential profiles have to be available
+
+### Set up
+
+```{r}
+# load packages I like to use
+library(checkpoint)
+library(tidyverse)
+library(readxl)
+library(kableExtra)
+
+# use packages as of a certain reference date
+checkpoint(snapshot_date = "2021-06-15")
+
+# see what my working directory is
+getwd()
+```
+
+### Emissions intensities
+
+I've downloaded the EPA's ghg emissions intensities from the web.  I need to choose the sheet(s) most relevant to me, download the data, and tidy it.  Maybe along the way I'll print out some of the documentation sheets.
+
+```{r}
+# set EPA ghg filespec
+epaGHGdataFileSpec <-
+  "source_data/SupplyChainEmissionFactorsforUSIndustriesCommodities.xlsx"
+# find out what sheets are there
+epaGHGdataAvailableSheets <-
+  excel_sheets(path=epaGHGdataFileSpec)
+kable(
+  as.data.frame(epaGHGdataAvailableSheets), 
+  caption="available sheets"
+)
+```
+Since my goal is to find the supply chain emissions of purchases, it seems right to use the Commodity based tables.  Which of the many commodity options should I choose?  
+
+The year records are a bit confusing, but I think they refer to versions of the I/O tables.  All of the emissions intensities are in kg per 2018 dollars.  TO DO: FIND OUT WHAT THE DIFFERENT YEARS REPRESENT.
+
+But: assuming I want the most recent, what I should import is:
+
+* 2016_Summary_Commodity
+* 2016_Detail_Commodity
+
+```{r}
+# import my sheets of interest
+epaGHGdataSet1raw <-
+  read_excel(
+    path=epaGHGdataFileSpec,
+    sheet="2016_Summary_Commodity"
+  )
+epaGHGdataSet2raw <-
+  read_excel(
+    path=epaGHGdataFileSpec,
+    sheet="2016_Detail_Commodity"
+  )
+```
+
+Looks like there is a data dictionary I might want to print out for the record.  These are the field names in the Excel tables.
+
+```{r}
+epaGHGdataDictionary <-
+  read_excel(path=epaGHGdataFileSpec, sheet="Data Dictionary")
+kable(epaGHGdataDictionary) %>% 
+  kable_styling(bootstrap_options = "bordered")
+```
+
+I'm not going to need all those fields.  Let's select and rename fields.
+
+```{r}
+# select desired fields and rename them for brevity
+epaGHGdataSet1 <-
+  epaGHGdataSet1raw %>%
+  select(
+    `Commodity Code`,
+    `Commodity Name`,
+    `Substance`,
+    `Unit`,
+    `Supply Chain Emission Factors without Margins`
+  ) %>%
+  rename(
+    comCode=`Commodity Code`,
+    comName=`Commodity Name`,
+    substance=Substance,
+    unit=Unit,
+    impFactor=`Supply Chain Emission Factors without Margins`
+  )
+epaGHGdataSet2 <-
+  epaGHGdataSet2raw %>%
+  select(
+    `Commodity Code`,
+    `Commodity Name`,
+    `Substance`,
+    `Unit`,
+    `Supply Chain Emission Factors without Margins`
+  ) %>% 
+  rename(
+    comCode=`Commodity Code`,
+    comName=`Commodity Name`,
+    substance=Substance,
+    unit=Unit,
+    impFactor=`Supply Chain Emission Factors without Margins`
+  )
+```
+
+Now I know I would like to combine these two tables -- so that users can enter expenditures in either detail or summary levels of detail (and mix and match).  That will be most convenient if the comCodes and comNames do not overlap between the two tables.  Let's check.
+
+```{r}
+epaGHGcomCodes1 <-
+  epaGHGdataSet1 %>% select(comCode) %>% distinct() 
+epaGHGcomCodes2 <-
+  epaGHGdataSet2 %>% select(comCode) %>% distinct()
+inner_join(
+  epaGHGcomCodes2 ,
+  epaGHGcomCodes1 ,
+  by="comCode"
+) %>% print()
+```
+
+whew, it looks like none overlap.  Let's try the commodity names.
+
+```{r}
+epaGHGcomNames1 <-
+  epaGHGdataSet1 %>% select(comName) %>% distinct() 
+epaGHGcomNames2 <-
+  epaGHGdataSet2 %>% select(comName) %>% distinct()
+inner_join(
+  epaGHGcomNames2 %>% mutate(level="detail"),
+  epaGHGcomNames1 %>% mutate(level="summary"),
+  by="comName"
+) %>% print()
+```
+
+
+Looks like there is a little overlap in the names.  But not in the codes.  So if I use codes as the key variable then it won't matter.  
+ I could also visually indicate the summary level textually -- all caps maybe?
+ 
+Let's try combining the names and printing them out as a table.
+
+```{r}
+# make a combined epa commodity table
+epaAllCommodityTable <-
+  bind_rows(
+    epaGHGdataSet1 %>%
+      select(comCode, comName) %>%
+      mutate(
+        dtlLvl="summary",
+        comName=str_to_upper(comName)
+      ) %>%
+      distinct(),
+    epaGHGdataSet2 %>%
+      select(comCode, comName) %>%
+      mutate(dtlLvl="detail") %>%
+      distinct()
+  ) %>%
+  arrange(comCode, comName)
+kable(epaAllCommodityTable) %>%
+  kable_styling(bootstrap_options = "responsive")
+```
+Well, what this tells me is that I can definitely add the two tables together.  But I need to preserve the comCode and (probably for clarity) also preserve the dtlLvl and also mark off the summary level somehow (as with all caps).
+
+All right let's make it.
+
+```{r}
+# make the combined impact intensities table
+epaGHGimpactIntensities <-
+  bind_rows(
+    epaGHGdataSet1 %>%
+      mutate(
+        dtlLvl="summary",
+        comName=str_to_upper(comName)
+      ),
+    epaGHGdataSet2 %>%
+      mutate(
+        dtlLvl="detail"
+      )
+  ) %>%
+  arrange(comCode, comName, substance)
+```
+
+So object epaGHGimpactIntensities is what I'll use.
+
+```{r}
+# clean up workspace by deleting most objects
+rm(
+  list=
+    setdiff(
+      ls(),
+      c("epaGHGimpactIntensities", "epaGHGdataDictionary")
+  )
+)
+```
+
+### global warming potentials
+
+peter canepa gave me some ar5 20 & 100 year
+
+Just noticed something in the epa tables.  For the "other gases" they have already provided a gwp.  I should
+
+* confirm that's what they're doing
+* decide whether to just accept what they've done
+* decide if I want to alter it
+
