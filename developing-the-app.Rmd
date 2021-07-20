@@ -107,8 +107,8 @@ epaGHGdataSet1 <-
     `Supply Chain Emission Factors without Margins`
   ) %>%
   rename(
-    comCode=`Commodity Code`,
-    comName=`Commodity Name`,
+    beaCode=`Commodity Code`,
+    beaName=`Commodity Name`,
     substance=Substance,
     unit=Unit,
     impFactor=`Supply Chain Emission Factors without Margins`
@@ -123,39 +123,39 @@ epaGHGdataSet2 <-
     `Supply Chain Emission Factors without Margins`
   ) %>% 
   rename(
-    comCode=`Commodity Code`,
-    comName=`Commodity Name`,
+    beaCode=`Commodity Code`,
+    beaName=`Commodity Name`,
     substance=Substance,
     unit=Unit,
     impFactor=`Supply Chain Emission Factors without Margins`
   )
 ```
 
-Now I know I would like to combine these two tables -- so that users can enter expenditures in either detail or summary levels of detail (and mix and match).  That will be most convenient if the comCodes and comNames do not overlap between the two tables.  Let's check.
+Now I know I would like to combine these two tables -- so that users can enter expenditures in either detail or summary levels of detail (and mix and match).  That will be most convenient if the beaCodes and beaNames do not overlap between the two tables.  Let's check.
 
 ```{r}
-epaGHGcomCodes1 <-
-  epaGHGdataSet1 %>% select(comCode) %>% distinct() 
-epaGHGcomCodes2 <-
-  epaGHGdataSet2 %>% select(comCode) %>% distinct()
+epaGHGbeaCodes1 <-
+  epaGHGdataSet1 %>% select(beaCode) %>% distinct() 
+epaGHGbeaCodes2 <-
+  epaGHGdataSet2 %>% select(beaCode) %>% distinct()
 inner_join(
-  epaGHGcomCodes2 ,
-  epaGHGcomCodes1 ,
-  by="comCode"
+  epaGHGbeaCodes2 ,
+  epaGHGbeaCodes1 ,
+  by="beaCode"
 ) %>% print()
 ```
 
 whew, it looks like none overlap.  Let's try the commodity names.
 
 ```{r}
-epaGHGcomNames1 <-
-  epaGHGdataSet1 %>% select(comName) %>% distinct() 
-epaGHGcomNames2 <-
-  epaGHGdataSet2 %>% select(comName) %>% distinct()
+epaGHGbeaNames1 <-
+  epaGHGdataSet1 %>% select(beaName) %>% distinct() 
+epaGHGbeaNames2 <-
+  epaGHGdataSet2 %>% select(beaName) %>% distinct()
 inner_join(
-  epaGHGcomNames2 %>% mutate(level="detail"),
-  epaGHGcomNames1 %>% mutate(level="summary"),
-  by="comName"
+  epaGHGbeaNames2 %>% mutate(level="detail"),
+  epaGHGbeaNames1 %>% mutate(level="summary"),
+  by="beaName"
 ) %>% print()
 ```
 
@@ -170,22 +170,22 @@ Let's try combining the names and printing them out as a table.
 epaAllCommodityTable <-
   bind_rows(
     epaGHGdataSet1 %>%
-      select(comCode, comName) %>%
+      select(beaCode, beaName) %>%
       mutate(
         dtlLvl="summary",
-        comName=str_to_upper(comName)
+        beaName=str_to_upper(beaName)
       ) %>%
       distinct(),
     epaGHGdataSet2 %>%
-      select(comCode, comName) %>%
+      select(beaCode, beaName) %>%
       mutate(dtlLvl="detail") %>%
       distinct()
   ) %>%
-  arrange(comCode, comName)
+  arrange(beaCode, beaName)
 kable(epaAllCommodityTable) %>%
   kable_styling(bootstrap_options = "responsive")
 ```
-Well, what this tells me is that I can definitely add the two tables together.  But I need to preserve the comCode and (probably for clarity) also preserve the dtlLvl and also mark off the summary level somehow (as with all caps).
+Well, what this tells me is that I can definitely add the two tables together.  But I need to preserve the beaCode and (probably for clarity) also preserve the dtlLvl and also mark off the summary level somehow (as with all caps).
 
 All right let's make it.
 
@@ -196,14 +196,14 @@ epaGHGimpactIntensities <-
     epaGHGdataSet1 %>%
       mutate(
         dtlLvl="summary",
-        comName=str_to_upper(comName)
+        beaName=str_to_upper(beaName)
       ),
     epaGHGdataSet2 %>%
       mutate(
         dtlLvl="detail"
       )
   ) %>%
-  arrange(comCode, comName, substance)
+  arrange(beaCode, beaName, substance)
 ```
 
 So object epaGHGimpactIntensities is what I'll use.
@@ -218,6 +218,136 @@ rm(
   )
 )
 ```
+
+### importing the spending data.
+
+In the app I need to import a user's file and then check that their data meets the acceptable categories.
+
+So let's develop the acceptable list first.
+
+```{r}
+# make acceptable spending category data frame & save it as disk file
+okSpendingCats <-
+  epaGHGimpactIntensities %>%
+  select(beaCode, beaName, dtlLvl) %>%
+  distinct() %>%
+  arrange(beaCode, beaName)
+saveRDS(okSpendingCats, "intermediate_data/okSpendingCats.RData")
+```
+
+Now, in a somewhat non-reproducible step, I'm going to create an Excel template to allow people to enter spending data in an acceptable format.  It is available in the "source_data" folder as "users_spending_data_blank.xlsx".  This may be copied and altered by users and uploaded to the app.
+
+Now I've got to take some spending data and see how it matches up.  More generally, I've got to figure out how to "validate" the incoming data... 
+
+* is it in the right format? (e.g. codes as text, spending as integer)
+* do all the codes have entries in the okSpendingCats?
+
+Let's try it with two different data files.
+
+* Rivin's Oregon spending data file produced in 2020 (from an obsolete version of this analysis)
+* A fictional spending data file using the template produced above.
+
+```{r}
+# get Rivin's draft spending file, circa 2020
+exampleSpendingData1 <-
+  read_excel(
+    path="../quick-purchasing-impacts/source_data/oregon_spending_2020_04_23.xlsx",
+    sheet="martin5",
+    skip=4,
+    col_names = TRUE,
+    col_types = c("text", "text", "text", "numeric")
+  ) %>%
+  rename(
+    userCategory=`DEQ Category`,
+    beaCode=`BAE  Code`,
+    userSpending=`BEA cost`
+  ) %>%
+  select(beaCode, userSpending, userCategory) %>%
+  filter(userSpending > 0) %>%
+  mutate(
+    # a manual edit based on a typo discovered below
+    beaCode=ifelse(beaCode=="GSLGH", "5412OP", beaCode)
+  ) %>%
+  arrange(beaCode, desc(userSpending))
+
+# print out rows of spending data
+print(nrow(exampleSpendingData1))
+
+# count how many rows join based on beaCode
+semi_join(
+  exampleSpendingData1,
+  okSpendingCats,
+  by="beaCode"
+) %>% nrow() %>% print()
+
+# print out rows that don't match
+anti_join(
+  exampleSpendingData1,
+  okSpendingCats,
+  by="beaCode"
+) %>% 
+kable() %>% kable_styling(bootstrap_options = "responsive")
+```
+
+Good news -- nearly everything matched up.  The examination above uncovered just one mismatch, which I found a reasonable substitute for.
+
+Ok, let's try the template I created.
+
+```{r}
+# import spreadsheet with spending data
+exampleSpendingData2 <-
+  read_excel(
+    path="source_data/users_spending_data_sample.xlsx",
+    skip=11,
+    col_names = TRUE
+  ) %>%
+  select(beaCode, userSpending, userCategory) %>%
+  filter(userSpending > 0) %>%
+  mutate(
+    # use this space for manual edits
+  ) %>%
+  arrange(beaCode, desc(userSpending))
+
+# print out rows of spending data
+print(nrow(exampleSpendingData2))
+
+# count how many rows join based on beaCode
+semi_join(
+  exampleSpendingData2,
+  okSpendingCats,
+  by="beaCode"
+) %>% nrow() %>% print()
+
+# print out rows that don't match
+anti_join(
+  exampleSpendingData1,
+  okSpendingCats,
+  by="beaCode"
+) %>% 
+kable() %>% kable_styling(bootstrap_options = "responsive")
+```
+Looks like that's the way to do it.
+
+* load in the table
+* reduce to those 3 standard fields
+* check for semi_joins and anti_joins
+* print out any anti_joins
+
+At this moment I'm going to create the file for the shiny app to see if I can upload data in the form of the template.
+
+...
+
+Looks like I got that working.  I'm going to have to add a lot of features later, like
+
+* additional validation
+* an example file to download
+* choice of using preset data from ORegon
+
+but that can go later.
+
+
+
+
 
 ### global warming potentials
 
