@@ -37,9 +37,26 @@ library(checkpoint)
 library(tidyverse)
 library(readxl)
 library(kableExtra)
+library(ggthemes)
+library(viridis)
 
 # use packages as of a certain reference date
 checkpoint(snapshot_date = "2021-06-15")
+
+# define some graphic conventions 
+# graphic conventions
+# create a custom theme for ggplots (assumes ggthemes is loaded)
+theme_539 <- function() {
+  theme_fivethirtyeight() +
+    theme(
+      rect=element_rect(fill="transparent"),
+      panel.grid.major = element_blank(),
+      axis.ticks = element_line(),
+      plot.title.position = "plot",
+      plot.title = element_text(hjust=0)
+    )
+}
+
 
 # see what my working directory is
 getwd()
@@ -214,7 +231,8 @@ rm(
   list=
     setdiff(
       ls(),
-      c("epaGHGimpactIntensities", "epaGHGdataDictionary")
+      c("epaGHGimpactIntensities", "epaGHGdataDictionary", 
+        "theme_539")
   )
 )
 ```
@@ -460,7 +478,7 @@ so, impact=spending x intensity x gwp.
 now that I think about it, the intensity and gwp tables will never change, so I can just merge them.
 
 ```{r}
-# combine the intentsity and GWP tables
+# combine the intensity and GWP tables
 impactIntensitiesWithGWPversions <-
   full_join(
     epaGHGimpactIntensities %>%
@@ -526,11 +544,159 @@ kable(testDF3)
 ```
 ok, i have previewed the processing!
 
+let's clean up the workspace
+
+```{r}
+# clean up workspace by deleting most objects
+rm(
+  list=
+    setdiff(
+      ls(),
+      c("epaGHGimpactIntensities", "epaGHGdataDictionary",
+        "impactIntensitiesWithGWPversions", "okSpendingCats",
+        "exampleSpendingData1", "exampleSpendingData2",
+        "theme_539")
+  )
+)
+```
+
 next session I should
 
 * preview some illustrations
 * start putting this stuff in the app
 
 
+### Drafting illustrations for app
 
+Let's imagine we're making spending and impact charts for the app, and want it to be as flexible/reactive as possible.
 
+So first step is we combine the spending and impact frames in full detail... no filtering
+
+```{r}
+# making the basic merge.
+# later this will be reactive, because the imported spending
+# data file could change
+impactsInDetail <-
+  left_join(
+    exampleSpendingData2,
+    impactIntensitiesWithGWPversions,
+    by="beaCode"
+  ) %>%
+  mutate(
+    impact=userSpending*impFactor*gwp,
+    actualSpending=ifelse(substance=="carbon dioxide", userSpending, 0)
+  )
+
+# making some lists of spending categories by abundance.
+# later these will be reactive too because they will change based on
+# the input data file
+userCategoryNames <-
+  impactsInDetail %>%
+  group_by(userCategory) %>%
+  summarise(actualSpending=sum(actualSpending)) %>%
+  ungroup() %>%
+  arrange(desc(actualSpending)) %>%
+  pull(userCategory)
+beaCategoryNames <-
+  impactsInDetail %>%
+  group_by(beaCode, beaName) %>%
+  summarise(actualSpending=sum(actualSpending)) %>%
+  ungroup() %>%
+  arrange(desc(actualSpending)) %>%
+  pull(beaName)
+gwpVersionNames <-
+  impactsInDetail %>%
+  group_by(gwpVersion) %>%
+  summarise(
+    impact=sum(ifelse(impactCategory=="GHG emissions", impact, 0))
+  ) %>%
+  ungroup() %>%
+  arrange(desc(impact)) %>%
+  pull(gwpVersion)
+```
+
+now to make a display i filter that and summarise it by the desired level of detail, in this case the user spending category.
+
+```{r}
+# a data frame that's later going to be reactive
+userCategoryChartData <-
+  impactsInDetail %>%
+  filter(
+    # later to be a selection in app...
+    impactCategory=="GHG emissions", 
+    # later to be a multi checkbox selection in app...
+    gwpVersion %in% c("IPCC AR5 100", "IPCC AR5 20")
+  ) %>%
+  group_by(impactCategory, impactUnits, gwpVersion, userCategory) %>%
+  summarise(
+    impact=sum(impact),
+    actualSpending=sum(actualSpending)
+  ) %>%
+  ungroup() %>%
+  mutate(
+    userCategory=factor(userCategory, levels=rev(userCategoryNames)),
+    gwpVersion=factor(gwpVersion, levels=rev(gwpVersionNames))
+  )
+
+# a title for the impact category.. to be reactive
+userCategoryImpactChartTitle <-
+  paste(
+    userCategoryChartData %>%
+      select(impactCategory) %>%
+      pull(impactCategory) %>%
+      unique(),
+    " (",
+    userCategoryChartData %>%
+      select(impactUnits) %>%
+      pull(impactUnits) %>%
+      unique(),
+    ")",
+    sep=""
+  )
+```
+now make a chart object and print it
+
+```{r}
+# a chart object that is later going to be reactive
+userCategorySpendingChartObject <-
+  ggplot()+
+  theme_539()+
+  ggtitle("Spending ($)")+
+  geom_bar(
+    data=userCategoryChartData,
+    aes(x=userCategory, y=actualSpending, fill=gwpVersion),
+    position="dodge",
+    stat="identity"
+  )+
+  coord_flip()+
+  scale_fill_viridis(
+    begin=0.32, end=1, discrete=T, direction=-1,
+    option=sample(LETTERS[1:8],1),
+    guide=guide_legend(reverse=T)
+  )
+  
+userCategorySpendingChartObject
+```
+now let's do the same thing for impacts.  however i need to get the impact name from a reactive object
+
+```{r}
+# a chart object that is later going to be reactive
+userCategoryImpactChartObject <-
+  ggplot()+
+  theme_539()+
+  ggtitle(userCategoryImpactChartTitle)+
+  geom_bar(
+    data=userCategoryChartData,
+    aes(x=userCategory, y=impact, fill=gwpVersion),
+    position="dodge",
+    stat="identity"
+  )+
+  coord_flip()+
+  scale_fill_viridis(
+    begin=0.32, end=1, discrete=T, direction=-1,
+    option=sample(LETTERS[1:8],1),
+    guide = guide_legend(reverse = T)
+  )
+  
+userCategoryImpactChartObject
+```
