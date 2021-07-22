@@ -346,16 +346,191 @@ Looks like I got that working.  I'm going to have to add a lot of features later
 but that can go later.
 
 
-
-
-
 ### global warming potentials
 
-peter canepa gave me some ar5 20 & 100 year
+The EPA data gives masses per expended $ for 3 particular gasses, and CO2 equivalents for one umbrella category "other gasses".  This gives the option of choosing your own Global Warming potentials (e.g. IPCC AR4 20 year, etc.), but dealing with those other gases will be a pain.
 
-Just noticed something in the epa tables.  For the "other gases" they have already provided a gwp.  I should
+* CO2 masses will always have a GWP of 1 (from defintion of GWP).
+* CH4 masses will have a varying GWP I can get from tables of GWP's.
+* N2O masses will have a varying GWP I can get from tables of GWP's.
+* the other gases are already reported with an inherent GWP (from AR4 100 year).  If I want to correct this I need to figure out the relationship of "other gas" GWP's under AR4 100 to their GWP's under other views.
 
-* confirm that's what they're doing
-* decide whether to just accept what they've done
-* decide if I want to alter it
+Let's read in some GWP's and do some filtering.
+
+```{r}
+# filespec of spreadsheet with GWP's from GaBi
+GWPfilespec <- "source_data/gwp_factors_from_gabi.xlsx"
+
+# get list of sheets in source file
+listOfGWPsheets <- 
+  excel_sheets(path=GWPfilespec)
+
+# read each sheet and label the estimates from sheet name
+for (i in 1:length(listOfGWPsheets)) {
+  tempDF <- 
+    read_excel(
+      path=GWPfilespec,
+      sheet=listOfGWPsheets[i],
+      skip=22,
+      col_names=c("compound", "junk1", "junk2", "gwp", "junk3"),
+      col_types=c("text", "numeric", "text", "numeric", "numeric")
+    ) %>%
+    select(compound, gwp) %>%
+    filter(gwp>0) %>%
+    mutate(
+      gwpVersion=listOfGWPsheets[i],
+      substance=
+        case_when(
+          compound=="Carbon dioxide [Inorganic emissions to air]" ~
+            "carbon dioxide",
+          compound=="Methane (biotic) [Organic emissions to air (group VOC)]" ~ "methane",
+          compound=="Nitrous oxide (laughing gas) [Inorganic emissions to air]" ~ "nitrous oxide",
+          TRUE ~ "other GHGs"
+        )
+    )
+  
+  if (i==1) {
+    gwpCollection <- tempDF[0,]
+  }
+  
+  gwpCollection <- 
+    bind_rows(gwpCollection, tempDF) 
+}
+
+# now lets summarize that GWP collection by gas group.
+GWPtoUseAlmost <-
+  gwpCollection %>%
+  mutate(log10gwp=log10(gwp)) %>%
+  group_by(gwpVersion, substance) %>%
+  summarise(log10gwp=mean(log10gwp)) %>%
+  ungroup() %>%
+  mutate(gwp=10**log10gwp) %>%
+  select(-log10gwp)
+# for the "other GHGs" I can't use those values as calculated.
+# I have to use a standard... for now let's say AR5 100.
+# when I get the data I should update that to AR4 100.
+standardValueForOtherGases <-
+  GWPtoUseAlmost %>% 
+  filter(gwpVersion=="IPCC AR4 100", substance=="other GHGs") %>%
+  pull(gwp)
+
+GWPtoUse <-
+  GWPtoUseAlmost %>%
+  mutate(
+    gwp=ifelse(
+      substance=="other GHGs", gwp/standardValueForOtherGases, gwp
+    )
+  )
+
+kable(GWPtoUse)
+```
+So looking at that table, all the figures for major gasses are correct.  For the "other gases" its supposed to be a ratio vs. the value for AR4 100.  The AR4 20 value makes sense.  Not sure about the AR5 values -- because unfortunately they did not come from completely compatible data sets.  I will have to see how much the other gases contribute to the results.  
+
+If they contribute a lot, I may need to go back into that table and try to make the AR5 selections more compatible with AR4.  Looks like there are more gases in the AR5, so I would try to use the AR4 subset, maybe with a flag field?
+
+Let's save that table to the intermediate zone so it can be used in the app.
+
+```{r}
+saveRDS(GWPtoUse, file="intermediate_data/GWPtoUse.RData")
+```
+
+### Putting it together in a sample calculation
+
+so now I've got some example spending, e.g.
+
+```{r}
+kable(head(exampleSpendingData2))
+```
+
+and some emissions intensity data, e.g.
+
+```{r}
+kable(head(epaGHGimpactIntensities))
+```
+
+and some GWP data, eg.
+
+```{r}
+kable(head(GWPtoUse))
+```
+
+and all I need to do is put them together in a way that can be filtered.
+
+so, impact=spending x intensity x gwp.
+now that I think about it, the intensity and gwp tables will never change, so I can just merge them.
+
+```{r}
+# combine the intentsity and GWP tables
+impactIntensitiesWithGWPversions <-
+  full_join(
+    epaGHGimpactIntensities %>%
+      mutate(
+        impactCategory="GHG emissions",
+        impactUnits="kg CO2e"
+    ),
+    GWPtoUse,
+    by="substance"
+  )
+# save the result as a disk file
+saveRDS(
+  impactIntensitiesWithGWPversions,
+  "intermediate_data/impactIntensitiesWithGWPversions.RData"
+)
+```
+
+now let's merge with some spending data and filter.
+this is the kind of merge that will need to be made in the app.
+users will select gwp version and (eventually) impact category
+
+```{r}
+# 
+testDF <-
+  left_join(
+    exampleSpendingData2,
+    impactIntensitiesWithGWPversions,
+    by="beaCode"
+  ) %>%
+  filter(
+    impactCategory=="GHG emissions" & 
+    gwpVersion %in% "IPCC AR4 100"
+  ) %>%
+  mutate(
+    impact=userSpending*impFactor*gwp,
+    actualSpending=ifelse(substance=="carbon dioxide", userSpending, 0)
+  )
+```
+
+now let's sum impacts by beaName and by userCategory
+
+```{r}
+testDF2 <-
+  testDF %>%
+  group_by(impactCategory, impactUnits, beaName) %>%
+  summarise(
+    userSpending=sum(actualSpending),
+    impact=sum(impact)
+  )
+kable(testDF2)
+```
+and
+
+```{r}
+testDF3 <-
+  testDF %>%
+  group_by(impactCategory, impactUnits, userCategory) %>%
+  summarise(
+    userSpending=sum(actualSpending),
+    impact=sum(impact)
+  )
+kable(testDF3)
+```
+ok, i have previewed the processing!
+
+next session I should
+
+* preview some illustrations
+* start putting this stuff in the app
+
+
+
 

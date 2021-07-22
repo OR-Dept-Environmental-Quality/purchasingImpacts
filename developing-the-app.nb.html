@@ -244,14 +244,46 @@ pre code {
 <h3>Set up</h3>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBsb2FkIHBhY2thZ2VzIEkgbGlrZSB0byB1c2VcbmxpYnJhcnkoY2hlY2twb2ludClcbmxpYnJhcnkodGlkeXZlcnNlKVxubGlicmFyeShyZWFkeGwpXG5saWJyYXJ5KGthYmxlRXh0cmEpXG5cbiMgdXNlIHBhY2thZ2VzIGFzIG9mIGEgY2VydGFpbiByZWZlcmVuY2UgZGF0ZVxuY2hlY2twb2ludChzbmFwc2hvdF9kYXRlID0gXCIyMDIxLTA2LTE1XCIpXG5gYGAifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBsb2FkIHBhY2thZ2VzIEkgbGlrZSB0byB1c2VcbmxpYnJhcnkoY2hlY2twb2ludClcbmBgYCJ9 -->
 <pre class="r"><code># load packages I like to use
-library(checkpoint)
-library(tidyverse)
-library(readxl)
-library(kableExtra)
+library(checkpoint)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5jaGVja3BvaW50OiBQYXJ0IG9mIHRoZSBSZXByb2R1Y2libGUgUiBUb29sa2l0IGZyb20gTWljcm9zb2Z0XG5odHRwczovL21yYW4ubWljcm9zb2Z0LmNvbS9kb2N1bWVudHMvcnJvL3JlcHJvZHVjaWJpbGl0eS9cbiJ9 -->
+<pre><code>
+checkpoint: Part of the Reproducible R Toolkit from Microsoft
+https://mran.microsoft.com/documents/rro/reproducibility/</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeSh0aWR5dmVyc2UpXG5gYGAifQ== -->
+<pre class="r"><code>library(tidyverse)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiUmVnaXN0ZXJlZCBTMyBtZXRob2RzIG92ZXJ3cml0dGVuIGJ5ICdkYnBseXInOlxuICBtZXRob2QgICAgICAgICBmcm9tXG4gIHByaW50LnRibF9sYXp5ICAgICBcbiAgcHJpbnQudGJsX3NxbCAgICAgIFxuLS0gQXR0YWNoaW5nIHBhY2thZ2VzIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tIHRpZHl2ZXJzZSAxLjMuMSAtLVxudiBnZ3Bsb3QyIDMuMy40ICAgICB2IHB1cnJyICAgMC4zLjRcbnYgdGliYmxlICAzLjEuMiAgICAgdiBkcGx5ciAgIDEuMC43XG52IHRpZHlyICAgMS4xLjMgICAgIHYgc3RyaW5nciAxLjQuMFxudiByZWFkciAgIDEuNC4wICAgICB2IGZvcmNhdHMgMC41LjFcbi0tIENvbmZsaWN0cyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSB0aWR5dmVyc2VfY29uZmxpY3RzKCkgLS1cbnggZHBseXI6OmZpbHRlcigpIG1hc2tzIHN0YXRzOjpmaWx0ZXIoKVxueCBkcGx5cjo6bGFnKCkgICAgbWFza3Mgc3RhdHM6OmxhZygpXG4ifQ== -->
+<pre><code>Registered S3 methods overwritten by &#39;dbplyr&#39;:
+  method         from
+  print.tbl_lazy     
+  print.tbl_sql      
+-- Attaching packages ----------------------------- tidyverse 1.3.1 --
+v ggplot2 3.3.4     v purrr   0.3.4
+v tibble  3.1.2     v dplyr   1.0.7
+v tidyr   1.1.3     v stringr 1.4.0
+v readr   1.4.0     v forcats 0.5.1
+-- Conflicts -------------------------------- tidyverse_conflicts() --
+x dplyr::filter() masks stats::filter()
+x dplyr::lag()    masks stats::lag()</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShyZWFkeGwpXG5saWJyYXJ5KGthYmxlRXh0cmEpXG5gYGAifQ== -->
+<pre class="r"><code>library(readxl)
+library(kableExtra)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5BdHRhY2hpbmcgcGFja2FnZTog4oCYa2FibGVFeHRyYeKAmVxuXG5UaGUgZm9sbG93aW5nIG9iamVjdCBpcyBtYXNrZWQgZnJvbSDigJhwYWNrYWdlOmRwbHly4oCZOlxuXG4gICAgZ3JvdXBfcm93c1xuIn0= -->
+<pre><code>
+Attaching package: ‘kableExtra’
 
-# use packages as of a certain reference date
+The following object is masked from ‘package:dplyr’:
+
+    group_rows</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyB1c2UgcGFja2FnZXMgYXMgb2YgYSBjZXJ0YWluIHJlZmVyZW5jZSBkYXRlXG5jaGVja3BvaW50KHNuYXBzaG90X2RhdGUgPSBcIjIwMjEtMDYtMTVcIilcbmBgYCJ9 -->
+<pre class="r"><code># use packages as of a certain reference date
 checkpoint(snapshot_date = &quot;2021-06-15&quot;)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-begin eyJkYXRhIjoiVXNpbmcgY2hlY2twb2ludCBkaXJlY3RvcnkgRTovLmNoZWNrcG9pbnQvMjAyMS0wNi0xNS9saWIvaTM4Ni13NjQtbWluZ3czMi80LjEuMFxuIn0= -->
@@ -3236,17 +3268,1207 @@ kable() %&gt;% kable_styling(bootstrap_options = &quot;responsive&quot;)</code><
 </div>
 <div id="global-warming-potentials" class="section level3">
 <h3>global warming potentials</h3>
-<p>peter canepa gave me some ar5 20 &amp; 100 year</p>
-<p>Just noticed something in the epa tables. For the “other gases” they have already provided a gwp. I should</p>
+<p>The EPA data gives masses per expended $ for 3 particular gasses, and CO2 equivalents for one umbrella category “other gasses”. This gives the option of choosing your own Global Warming potentials (e.g. IPCC AR4 20 year, etc.), but dealing with those other gases will be a pain.</p>
 <ul>
-<li>confirm that’s what they’re doing</li>
-<li>decide whether to just accept what they’ve done</li>
-<li>decide if I want to alter it</li>
+<li>CO2 masses will always have a GWP of 1 (from defintion of GWP).</li>
+<li>CH4 masses will have a varying GWP I can get from tables of GWP’s.</li>
+<li>N2O masses will have a varying GWP I can get from tables of GWP’s.</li>
+<li>the other gases are already reported with an inherent GWP (from AR4 100 year). If I want to correct this I need to figure out the relationship of “other gas” GWP’s under AR4 100 to their GWP’s under other views.</li>
+</ul>
+<p>Let’s read in some GWP’s and do some filtering.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBmaWxlc3BlYyBvZiBzcHJlYWRzaGVldCB3aXRoIEdXUCdzIGZyb20gR2FCaVxuR1dQZmlsZXNwZWMgPC0gXCJzb3VyY2VfZGF0YS9nd3BfZmFjdG9yc19mcm9tX2dhYmkueGxzeFwiXG5cbiMgZ2V0IGxpc3Qgb2Ygc2hlZXRzIGluIHNvdXJjZSBmaWxlXG5saXN0T2ZHV1BzaGVldHMgPC0gXG4gIGV4Y2VsX3NoZWV0cyhwYXRoPUdXUGZpbGVzcGVjKVxuXG4jIHJlYWQgZWFjaCBzaGVldCBhbmQgbGFiZWwgdGhlIGVzdGltYXRlcyBmcm9tIHNoZWV0IG5hbWVcbmZvciAoaSBpbiAxOmxlbmd0aChsaXN0T2ZHV1BzaGVldHMpKSB7XG4gIHRlbXBERiA8LSBcbiAgICByZWFkX2V4Y2VsKFxuICAgICAgcGF0aD1HV1BmaWxlc3BlYyxcbiAgICAgIHNoZWV0PWxpc3RPZkdXUHNoZWV0c1tpXSxcbiAgICAgIHNraXA9MjIsXG4gICAgICBjb2xfbmFtZXM9YyhcImNvbXBvdW5kXCIsIFwianVuazFcIiwgXCJqdW5rMlwiLCBcImd3cFwiLCBcImp1bmszXCIpLFxuICAgICAgY29sX3R5cGVzPWMoXCJ0ZXh0XCIsIFwibnVtZXJpY1wiLCBcInRleHRcIiwgXCJudW1lcmljXCIsIFwibnVtZXJpY1wiKVxuICAgICkgJT4lXG4gICAgc2VsZWN0KGNvbXBvdW5kLCBnd3ApICU+JVxuICAgIGZpbHRlcihnd3A+MCkgJT4lXG4gICAgbXV0YXRlKFxuICAgICAgZ3dwVmVyc2lvbj1saXN0T2ZHV1BzaGVldHNbaV0sXG4gICAgICBzdWJzdGFuY2U9XG4gICAgICAgIGNhc2Vfd2hlbihcbiAgICAgICAgICBjb21wb3VuZD09XCJDYXJib24gZGlveGlkZSBbSW5vcmdhbmljIGVtaXNzaW9ucyB0byBhaXJdXCIgflxuICAgICAgICAgICAgXCJjYXJib24gZGlveGlkZVwiLFxuICAgICAgICAgIGNvbXBvdW5kPT1cIk1ldGhhbmUgKGJpb3RpYykgW09yZ2FuaWMgZW1pc3Npb25zIHRvIGFpciAoZ3JvdXAgVk9DKV1cIiB+IFwibWV0aGFuZVwiLFxuICAgICAgICAgIGNvbXBvdW5kPT1cIk5pdHJvdXMgb3hpZGUgKGxhdWdoaW5nIGdhcykgW0lub3JnYW5pYyBlbWlzc2lvbnMgdG8gYWlyXVwiIH4gXCJuaXRyb3VzIG94aWRlXCIsXG4gICAgICAgICAgVFJVRSB+IFwib3RoZXIgR0hHc1wiXG4gICAgICAgIClcbiAgICApXG4gIFxuICBpZiAoaT09MSkge1xuICAgIGd3cENvbGxlY3Rpb24gPC0gdGVtcERGWzAsXVxuICB9XG4gIFxuICBnd3BDb2xsZWN0aW9uIDwtIFxuICAgIGJpbmRfcm93cyhnd3BDb2xsZWN0aW9uLCB0ZW1wREYpIFxufVxuXG4jIG5vdyBsZXRzIHN1bW1hcml6ZSB0aGF0IEdXUCBjb2xsZWN0aW9uIGJ5IGdhcyBncm91cC5cbkdXUHRvVXNlQWxtb3N0IDwtXG4gIGd3cENvbGxlY3Rpb24gJT4lXG4gIG11dGF0ZShsb2cxMGd3cD1sb2cxMChnd3ApKSAlPiVcbiAgZ3JvdXBfYnkoZ3dwVmVyc2lvbiwgc3Vic3RhbmNlKSAlPiVcbiAgc3VtbWFyaXNlKGxvZzEwZ3dwPW1lYW4obG9nMTBnd3ApKSAlPiVcbiAgdW5ncm91cCgpICU+JVxuICBtdXRhdGUoZ3dwPTEwKipsb2cxMGd3cCkgJT4lXG4gIHNlbGVjdCgtbG9nMTBnd3ApXG5gYGAifQ== -->
+<pre class="r"><code># filespec of spreadsheet with GWP&#39;s from GaBi
+GWPfilespec &lt;- &quot;source_data/gwp_factors_from_gabi.xlsx&quot;
+
+# get list of sheets in source file
+listOfGWPsheets &lt;- 
+  excel_sheets(path=GWPfilespec)
+
+# read each sheet and label the estimates from sheet name
+for (i in 1:length(listOfGWPsheets)) {
+  tempDF &lt;- 
+    read_excel(
+      path=GWPfilespec,
+      sheet=listOfGWPsheets[i],
+      skip=22,
+      col_names=c(&quot;compound&quot;, &quot;junk1&quot;, &quot;junk2&quot;, &quot;gwp&quot;, &quot;junk3&quot;),
+      col_types=c(&quot;text&quot;, &quot;numeric&quot;, &quot;text&quot;, &quot;numeric&quot;, &quot;numeric&quot;)
+    ) %&gt;%
+    select(compound, gwp) %&gt;%
+    filter(gwp&gt;0) %&gt;%
+    mutate(
+      gwpVersion=listOfGWPsheets[i],
+      substance=
+        case_when(
+          compound==&quot;Carbon dioxide [Inorganic emissions to air]&quot; ~
+            &quot;carbon dioxide&quot;,
+          compound==&quot;Methane (biotic) [Organic emissions to air (group VOC)]&quot; ~ &quot;methane&quot;,
+          compound==&quot;Nitrous oxide (laughing gas) [Inorganic emissions to air]&quot; ~ &quot;nitrous oxide&quot;,
+          TRUE ~ &quot;other GHGs&quot;
+        )
+    )
+  
+  if (i==1) {
+    gwpCollection &lt;- tempDF[0,]
+  }
+  
+  gwpCollection &lt;- 
+    bind_rows(gwpCollection, tempDF) 
+}
+
+# now lets summarize that GWP collection by gas group.
+GWPtoUseAlmost &lt;-
+  gwpCollection %&gt;%
+  mutate(log10gwp=log10(gwp)) %&gt;%
+  group_by(gwpVersion, substance) %&gt;%
+  summarise(log10gwp=mean(log10gwp)) %&gt;%
+  ungroup() %&gt;%
+  mutate(gwp=10**log10gwp) %&gt;%
+  select(-log10gwp)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiYHN1bW1hcmlzZSgpYCBoYXMgZ3JvdXBlZCBvdXRwdXQgYnkgJ2d3cFZlcnNpb24nLiBZb3UgY2FuIG92ZXJyaWRlIHVzaW5nIHRoZSBgLmdyb3Vwc2AgYXJndW1lbnQuXG4ifQ== -->
+<pre><code>`summarise()` has grouped output by &#39;gwpVersion&#39;. You can override using the `.groups` argument.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBmb3IgdGhlIFwib3RoZXIgR0hHc1wiIEkgY2FuJ3QgdXNlIHRob3NlIHZhbHVlcyBhcyBjYWxjdWxhdGVkLlxuIyBJIGhhdmUgdG8gdXNlIGEgc3RhbmRhcmQuLi4gZm9yIG5vdyBsZXQncyBzYXkgQVI1IDEwMC5cbiMgd2hlbiBJIGdldCB0aGUgZGF0YSBJIHNob3VsZCB1cGRhdGUgdGhhdCB0byBBUjQgMTAwLlxuc3RhbmRhcmRWYWx1ZUZvck90aGVyR2FzZXMgPC1cbiAgR1dQdG9Vc2VBbG1vc3QgJT4lIFxuICBmaWx0ZXIoZ3dwVmVyc2lvbj09XCJJUENDIEFSNCAxMDBcIiwgc3Vic3RhbmNlPT1cIm90aGVyIEdIR3NcIikgJT4lXG4gIHB1bGwoZ3dwKVxuXG5HV1B0b1VzZSA8LVxuICBHV1B0b1VzZUFsbW9zdCAlPiVcbiAgbXV0YXRlKFxuICAgIGd3cD1pZmVsc2UoXG4gICAgICBzdWJzdGFuY2U9PVwib3RoZXIgR0hHc1wiLCBnd3Avc3RhbmRhcmRWYWx1ZUZvck90aGVyR2FzZXMsIGd3cFxuICAgIClcbiAgKVxuXG5rYWJsZShHV1B0b1VzZSlcbmBgYCJ9 -->
+<pre class="r"><code># for the &quot;other GHGs&quot; I can&#39;t use those values as calculated.
+# I have to use a standard... for now let&#39;s say AR5 100.
+# when I get the data I should update that to AR4 100.
+standardValueForOtherGases &lt;-
+  GWPtoUseAlmost %&gt;% 
+  filter(gwpVersion==&quot;IPCC AR4 100&quot;, substance==&quot;other GHGs&quot;) %&gt;%
+  pull(gwp)
+
+GWPtoUse &lt;-
+  GWPtoUseAlmost %&gt;%
+  mutate(
+    gwp=ifelse(
+      substance==&quot;other GHGs&quot;, gwp/standardValueForOtherGases, gwp
+    )
+  )
+
+kable(GWPtoUse)</code></pre>
+<!-- rnb-source-end -->
+
+<!-- rnb-html-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImtuaXRfYXNpcyJdLCJzaXppbmdQb2xpY3kiOltdfX0= -->
+
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+gwpVersion
+</th>
+<th style="text-align:left;">
+substance
+</th>
+<th style="text-align:right;">
+gwp
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+IPCC AR4 100
+</td>
+<td style="text-align:left;">
+carbon dioxide
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+IPCC AR4 100
+</td>
+<td style="text-align:left;">
+methane
+</td>
+<td style="text-align:right;">
+25.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+IPCC AR4 100
+</td>
+<td style="text-align:left;">
+nitrous oxide
+</td>
+<td style="text-align:right;">
+298.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+IPCC AR4 100
+</td>
+<td style="text-align:left;">
+other GHGs
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+IPCC AR4 20
+</td>
+<td style="text-align:left;">
+carbon dioxide
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+IPCC AR4 20
+</td>
+<td style="text-align:left;">
+methane
+</td>
+<td style="text-align:right;">
+72.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+IPCC AR4 20
+</td>
+<td style="text-align:left;">
+nitrous oxide
+</td>
+<td style="text-align:right;">
+289.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+IPCC AR4 20
+</td>
+<td style="text-align:left;">
+other GHGs
+</td>
+<td style="text-align:right;">
+2.2182809
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+IPCC AR5 100
+</td>
+<td style="text-align:left;">
+carbon dioxide
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+IPCC AR5 100
+</td>
+<td style="text-align:left;">
+methane
+</td>
+<td style="text-align:right;">
+28.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+IPCC AR5 100
+</td>
+<td style="text-align:left;">
+nitrous oxide
+</td>
+<td style="text-align:right;">
+265.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+IPCC AR5 100
+</td>
+<td style="text-align:left;">
+other GHGs
+</td>
+<td style="text-align:right;">
+0.2295294
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+IPCC AR5 20
+</td>
+<td style="text-align:left;">
+carbon dioxide
+</td>
+<td style="text-align:right;">
+1.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+IPCC AR5 20
+</td>
+<td style="text-align:left;">
+methane
+</td>
+<td style="text-align:right;">
+84.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+IPCC AR5 20
+</td>
+<td style="text-align:left;">
+nitrous oxide
+</td>
+<td style="text-align:right;">
+264.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+IPCC AR5 20
+</td>
+<td style="text-align:left;">
+other GHGs
+</td>
+<td style="text-align:right;">
+0.5294390
+</td>
+</tr>
+</tbody>
+</table>
+
+
+<!-- rnb-html-end -->
+
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>So looking at that table, all the figures for major gasses are correct. For the “other gases” its supposed to be a ratio vs. the value for AR4 100. The AR4 20 value makes sense. Not sure about the AR5 values – because unfortunately they did not come from completely compatible data sets. I will have to see how much the other gases contribute to the results.</p>
+<p>If they contribute a lot, I may need to go back into that table and try to make the AR5 selections more compatible with AR4. Looks like there are more gases in the AR5, so I would try to use the AR4 subset, maybe with a flag field?</p>
+<p>Let’s save that table to the intermediate zone so it can be used in the app.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc2F2ZVJEUyhHV1B0b1VzZSwgZmlsZT1cImludGVybWVkaWF0ZV9kYXRhL0dXUHRvVXNlLlJEYXRhXCIpXG5gYGAifQ== -->
+<pre class="r"><code>saveRDS(GWPtoUse, file=&quot;intermediate_data/GWPtoUse.RData&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="putting-it-together-in-a-sample-calculation" class="section level3">
+<h3>Putting it together in a sample calculation</h3>
+<p>so now I’ve got some example spending, e.g.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxua2FibGUoaGVhZChleGFtcGxlU3BlbmRpbmdEYXRhMikpXG5gYGAifQ== -->
+<pre class="r"><code>kable(head(exampleSpendingData2))</code></pre>
+<!-- rnb-source-end -->
+
+<!-- rnb-html-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImtuaXRfYXNpcyJdLCJzaXppbmdQb2xpY3kiOltdfX0= -->
+
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+beaCode
+</th>
+<th style="text-align:right;">
+userSpending
+</th>
+<th style="text-align:left;">
+userCategory
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+221100
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:left;">
+Utilities
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+221200
+</td>
+<td style="text-align:right;">
+73
+</td>
+<td style="text-align:left;">
+Utilities
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+221300
+</td>
+<td style="text-align:right;">
+160
+</td>
+<td style="text-align:left;">
+Utilities
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+336991
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:left;">
+Transportation
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+445000
+</td>
+<td style="text-align:right;">
+1000
+</td>
+<td style="text-align:left;">
+Food &amp; dining
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+485000
+</td>
+<td style="text-align:right;">
+200
+</td>
+<td style="text-align:left;">
+Transportation
+</td>
+</tr>
+</tbody>
+</table>
+
+
+<!-- rnb-html-end -->
+
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>and some emissions intensity data, e.g.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxua2FibGUoaGVhZChlcGFHSEdpbXBhY3RJbnRlbnNpdGllcykpXG5gYGAifQ== -->
+<pre class="r"><code>kable(head(epaGHGimpactIntensities))</code></pre>
+<!-- rnb-source-end -->
+
+<!-- rnb-html-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImtuaXRfYXNpcyJdLCJzaXppbmdQb2xpY3kiOltdfX0= -->
+
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+beaCode
+</th>
+<th style="text-align:left;">
+beaName
+</th>
+<th style="text-align:left;">
+substance
+</th>
+<th style="text-align:left;">
+unit
+</th>
+<th style="text-align:right;">
+impFactor
+</th>
+<th style="text-align:left;">
+dtlLvl
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+1111A0
+</td>
+<td style="text-align:left;">
+Fresh soybeans, canola, flaxseeds, and other oilseeds
+</td>
+<td style="text-align:left;">
+carbon dioxide
+</td>
+<td style="text-align:left;">
+kg/2018 USD, purchaser price
+</td>
+<td style="text-align:right;">
+0.323
+</td>
+<td style="text-align:left;">
+detail
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1111A0
+</td>
+<td style="text-align:left;">
+Fresh soybeans, canola, flaxseeds, and other oilseeds
+</td>
+<td style="text-align:left;">
+methane
+</td>
+<td style="text-align:left;">
+kg/2018 USD, purchaser price
+</td>
+<td style="text-align:right;">
+0.001
+</td>
+<td style="text-align:left;">
+detail
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1111A0
+</td>
+<td style="text-align:left;">
+Fresh soybeans, canola, flaxseeds, and other oilseeds
+</td>
+<td style="text-align:left;">
+nitrous oxide
+</td>
+<td style="text-align:left;">
+kg/2018 USD, purchaser price
+</td>
+<td style="text-align:right;">
+0.002
+</td>
+<td style="text-align:left;">
+detail
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1111A0
+</td>
+<td style="text-align:left;">
+Fresh soybeans, canola, flaxseeds, and other oilseeds
+</td>
+<td style="text-align:left;">
+other GHGs
+</td>
+<td style="text-align:left;">
+kg CO2e/2018 USD, purchaser price
+</td>
+<td style="text-align:right;">
+0.003
+</td>
+<td style="text-align:left;">
+detail
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1111B0
+</td>
+<td style="text-align:left;">
+Fresh wheat, corn, rice, and other grains
+</td>
+<td style="text-align:left;">
+carbon dioxide
+</td>
+<td style="text-align:left;">
+kg/2018 USD, purchaser price
+</td>
+<td style="text-align:right;">
+0.658
+</td>
+<td style="text-align:left;">
+detail
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1111B0
+</td>
+<td style="text-align:left;">
+Fresh wheat, corn, rice, and other grains
+</td>
+<td style="text-align:left;">
+methane
+</td>
+<td style="text-align:left;">
+kg/2018 USD, purchaser price
+</td>
+<td style="text-align:right;">
+0.006
+</td>
+<td style="text-align:left;">
+detail
+</td>
+</tr>
+</tbody>
+</table>
+
+
+<!-- rnb-html-end -->
+
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>and some GWP data, eg.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxua2FibGUoaGVhZChHV1B0b1VzZSkpXG5gYGAifQ== -->
+<pre class="r"><code>kable(head(GWPtoUse))</code></pre>
+<!-- rnb-source-end -->
+
+<!-- rnb-html-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImtuaXRfYXNpcyJdLCJzaXppbmdQb2xpY3kiOltdfX0= -->
+
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+gwpVersion
+</th>
+<th style="text-align:left;">
+substance
+</th>
+<th style="text-align:right;">
+gwp
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+IPCC AR4 100
+</td>
+<td style="text-align:left;">
+carbon dioxide
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+IPCC AR4 100
+</td>
+<td style="text-align:left;">
+methane
+</td>
+<td style="text-align:right;">
+25
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+IPCC AR4 100
+</td>
+<td style="text-align:left;">
+nitrous oxide
+</td>
+<td style="text-align:right;">
+298
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+IPCC AR4 100
+</td>
+<td style="text-align:left;">
+other GHGs
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+IPCC AR4 20
+</td>
+<td style="text-align:left;">
+carbon dioxide
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+IPCC AR4 20
+</td>
+<td style="text-align:left;">
+methane
+</td>
+<td style="text-align:right;">
+72
+</td>
+</tr>
+</tbody>
+</table>
+
+
+<!-- rnb-html-end -->
+
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>and all I need to do is put them together in a way that can be filtered.</p>
+<p>so, impact=spending x intensity x gwp. now that I think about it, the intensity and gwp tables will never change, so I can just merge them.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBjb21iaW5lIHRoZSBpbnRlbnRzaXR5IGFuZCBHV1AgdGFibGVzXG5pbXBhY3RJbnRlbnNpdGllc1dpdGhHV1B2ZXJzaW9ucyA8LVxuICBmdWxsX2pvaW4oXG4gICAgZXBhR0hHaW1wYWN0SW50ZW5zaXRpZXMgJT4lXG4gICAgICBtdXRhdGUoXG4gICAgICAgIGltcGFjdENhdGVnb3J5PVwiR0hHIGVtaXNzaW9uc1wiLFxuICAgICAgICBpbXBhY3RVbml0cz1cImtnIENPMmVcIlxuICAgICksXG4gICAgR1dQdG9Vc2UsXG4gICAgYnk9XCJzdWJzdGFuY2VcIlxuICApXG4jIHNhdmUgdGhlIHJlc3VsdCBhcyBhIGRpc2sgZmlsZVxuc2F2ZVJEUyhcbiAgaW1wYWN0SW50ZW5zaXRpZXNXaXRoR1dQdmVyc2lvbnMsXG4gIFwiaW50ZXJtZWRpYXRlX2RhdGEvaW1wYWN0SW50ZW5zaXRpZXNXaXRoR1dQdmVyc2lvbnMuUkRhdGFcIlxuKVxuYGBgIn0= -->
+<pre class="r"><code># combine the intentsity and GWP tables
+impactIntensitiesWithGWPversions &lt;-
+  full_join(
+    epaGHGimpactIntensities %&gt;%
+      mutate(
+        impactCategory=&quot;GHG emissions&quot;,
+        impactUnits=&quot;kg CO2e&quot;
+    ),
+    GWPtoUse,
+    by=&quot;substance&quot;
+  )
+# save the result as a disk file
+saveRDS(
+  impactIntensitiesWithGWPversions,
+  &quot;intermediate_data/impactIntensitiesWithGWPversions.RData&quot;
+)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>now let’s merge with some spending data and filter. this is the kind of merge that will need to be made in the app. users will select gwp version and (eventually) impact category</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBcbnRlc3RERiA8LVxuICBsZWZ0X2pvaW4oXG4gICAgZXhhbXBsZVNwZW5kaW5nRGF0YTIsXG4gICAgaW1wYWN0SW50ZW5zaXRpZXNXaXRoR1dQdmVyc2lvbnMsXG4gICAgYnk9XCJiZWFDb2RlXCJcbiAgKSAlPiVcbiAgZmlsdGVyKFxuICAgIGltcGFjdENhdGVnb3J5PT1cIkdIRyBlbWlzc2lvbnNcIiAmIFxuICAgIGd3cFZlcnNpb24gJWluJSBcIklQQ0MgQVI0IDEwMFwiXG4gICkgJT4lXG4gIG11dGF0ZShcbiAgICBpbXBhY3Q9dXNlclNwZW5kaW5nKmltcEZhY3Rvcipnd3AsXG4gICAgYWN0dWFsU3BlbmRpbmc9aWZlbHNlKHN1YnN0YW5jZT09XCJjYXJib24gZGlveGlkZVwiLCB1c2VyU3BlbmRpbmcsIDApXG4gIClcbmBgYCJ9 -->
+<pre class="r"><code># 
+testDF &lt;-
+  left_join(
+    exampleSpendingData2,
+    impactIntensitiesWithGWPversions,
+    by=&quot;beaCode&quot;
+  ) %&gt;%
+  filter(
+    impactCategory==&quot;GHG emissions&quot; &amp; 
+    gwpVersion %in% &quot;IPCC AR4 100&quot;
+  ) %&gt;%
+  mutate(
+    impact=userSpending*impFactor*gwp,
+    actualSpending=ifelse(substance==&quot;carbon dioxide&quot;, userSpending, 0)
+  )</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>now let’s sum impacts by beaName and by userCategory</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGVzdERGMiA8LVxuICB0ZXN0REYgJT4lXG4gIGdyb3VwX2J5KGltcGFjdENhdGVnb3J5LCBpbXBhY3RVbml0cywgYmVhTmFtZSkgJT4lXG4gIHN1bW1hcmlzZShcbiAgICB1c2VyU3BlbmRpbmc9c3VtKGFjdHVhbFNwZW5kaW5nKSxcbiAgICBpbXBhY3Q9c3VtKGltcGFjdClcbiAgKVxuYGBgIn0= -->
+<pre class="r"><code>testDF2 &lt;-
+  testDF %&gt;%
+  group_by(impactCategory, impactUnits, beaName) %&gt;%
+  summarise(
+    userSpending=sum(actualSpending),
+    impact=sum(impact)
+  )</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiYHN1bW1hcmlzZSgpYCBoYXMgZ3JvdXBlZCBvdXRwdXQgYnkgJ2ltcGFjdENhdGVnb3J5JywgJ2ltcGFjdFVuaXRzJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgIGFyZ3VtZW50LlxuIn0= -->
+<pre><code>`summarise()` has grouped output by &#39;impactCategory&#39;, &#39;impactUnits&#39;. You can override using the `.groups` argument.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxua2FibGUodGVzdERGMilcbmBgYCJ9 -->
+<pre class="r"><code>kable(testDF2)</code></pre>
+<!-- rnb-source-end -->
+
+<!-- rnb-html-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImtuaXRfYXNpcyJdLCJzaXppbmdQb2xpY3kiOltdfX0= -->
+
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+impactCategory
+</th>
+<th style="text-align:left;">
+impactUnits
+</th>
+<th style="text-align:left;">
+beaName
+</th>
+<th style="text-align:right;">
+userSpending
+</th>
+<th style="text-align:right;">
+impact
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+GHG emissions
+</td>
+<td style="text-align:left;">
+kg CO2e
+</td>
+<td style="text-align:left;">
+Cable and subscription programming
+</td>
+<td style="text-align:right;">
+30
+</td>
+<td style="text-align:right;">
+3.27
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+GHG emissions
+</td>
+<td style="text-align:left;">
+kg CO2e
+</td>
+<td style="text-align:left;">
+Drinking water and wastewater treatment
+</td>
+<td style="text-align:right;">
+160
+</td>
+<td style="text-align:right;">
+98.88
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+GHG emissions
+</td>
+<td style="text-align:left;">
+kg CO2e
+</td>
+<td style="text-align:left;">
+Electricity
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+374.90
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+GHG emissions
+</td>
+<td style="text-align:left;">
+kg CO2e
+</td>
+<td style="text-align:left;">
+Elementary and secondary schools
+</td>
+<td style="text-align:right;">
+500
+</td>
+<td style="text-align:right;">
+81.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+GHG emissions
+</td>
+<td style="text-align:left;">
+kg CO2e
+</td>
+<td style="text-align:left;">
+Food and beverage stores
+</td>
+<td style="text-align:right;">
+1000
+</td>
+<td style="text-align:right;">
+286.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+GHG emissions
+</td>
+<td style="text-align:left;">
+kg CO2e
+</td>
+<td style="text-align:left;">
+FOOD SERVICES AND DRINKING PLACES
+</td>
+<td style="text-align:right;">
+500
+</td>
+<td style="text-align:right;">
+112.50
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+GHG emissions
+</td>
+<td style="text-align:left;">
+kg CO2e
+</td>
+<td style="text-align:left;">
+Hospitals
+</td>
+<td style="text-align:right;">
+500
+</td>
+<td style="text-align:right;">
+86.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+GHG emissions
+</td>
+<td style="text-align:left;">
+kg CO2e
+</td>
+<td style="text-align:left;">
+Motorcycle, bicycle, and parts
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+8.30
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+GHG emissions
+</td>
+<td style="text-align:left;">
+kg CO2e
+</td>
+<td style="text-align:left;">
+Natural gas
+</td>
+<td style="text-align:right;">
+73
+</td>
+<td style="text-align:right;">
+58.40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+GHG emissions
+</td>
+<td style="text-align:left;">
+kg CO2e
+</td>
+<td style="text-align:left;">
+Other educational services
+</td>
+<td style="text-align:right;">
+300
+</td>
+<td style="text-align:right;">
+44.70
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+GHG emissions
+</td>
+<td style="text-align:left;">
+kg CO2e
+</td>
+<td style="text-align:left;">
+Outpatient healthcare
+</td>
+<td style="text-align:right;">
+1000
+</td>
+<td style="text-align:right;">
+142.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+GHG emissions
+</td>
+<td style="text-align:left;">
+kg CO2e
+</td>
+<td style="text-align:left;">
+Passenger ground transport
+</td>
+<td style="text-align:right;">
+200
+</td>
+<td style="text-align:right;">
+80.60
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+GHG emissions
+</td>
+<td style="text-align:left;">
+kg CO2e
+</td>
+<td style="text-align:left;">
+Radio and television
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+1.12
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+GHG emissions
+</td>
+<td style="text-align:left;">
+kg CO2e
+</td>
+<td style="text-align:left;">
+Salons and barber shops
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:right;">
+7.40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+GHG emissions
+</td>
+<td style="text-align:left;">
+kg CO2e
+</td>
+<td style="text-align:left;">
+Telecommunications
+</td>
+<td style="text-align:right;">
+80
+</td>
+<td style="text-align:right;">
+6.56
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+GHG emissions
+</td>
+<td style="text-align:left;">
+kg CO2e
+</td>
+<td style="text-align:left;">
+Wireless telecommunications
+</td>
+<td style="text-align:right;">
+80
+</td>
+<td style="text-align:right;">
+8.88
+</td>
+</tr>
+</tbody>
+</table>
+
+
+<!-- rnb-html-end -->
+
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>and</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGVzdERGMyA8LVxuICB0ZXN0REYgJT4lXG4gIGdyb3VwX2J5KGltcGFjdENhdGVnb3J5LCBpbXBhY3RVbml0cywgdXNlckNhdGVnb3J5KSAlPiVcbiAgc3VtbWFyaXNlKFxuICAgIHVzZXJTcGVuZGluZz1zdW0oYWN0dWFsU3BlbmRpbmcpLFxuICAgIGltcGFjdD1zdW0oaW1wYWN0KVxuICApXG5gYGAifQ== -->
+<pre class="r"><code>testDF3 &lt;-
+  testDF %&gt;%
+  group_by(impactCategory, impactUnits, userCategory) %&gt;%
+  summarise(
+    userSpending=sum(actualSpending),
+    impact=sum(impact)
+  )</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiYHN1bW1hcmlzZSgpYCBoYXMgZ3JvdXBlZCBvdXRwdXQgYnkgJ2ltcGFjdENhdGVnb3J5JywgJ2ltcGFjdFVuaXRzJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgIGFyZ3VtZW50LlxuIn0= -->
+<pre><code>`summarise()` has grouped output by &#39;impactCategory&#39;, &#39;impactUnits&#39;. You can override using the `.groups` argument.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxua2FibGUodGVzdERGMylcbmBgYCJ9 -->
+<pre class="r"><code>kable(testDF3)</code></pre>
+<!-- rnb-source-end -->
+
+<!-- rnb-html-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImtuaXRfYXNpcyJdLCJzaXppbmdQb2xpY3kiOltdfX0= -->
+
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+impactCategory
+</th>
+<th style="text-align:left;">
+impactUnits
+</th>
+<th style="text-align:left;">
+userCategory
+</th>
+<th style="text-align:right;">
+userSpending
+</th>
+<th style="text-align:right;">
+impact
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+GHG emissions
+</td>
+<td style="text-align:left;">
+kg CO2e
+</td>
+<td style="text-align:left;">
+Education
+</td>
+<td style="text-align:right;">
+800
+</td>
+<td style="text-align:right;">
+125.70
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+GHG emissions
+</td>
+<td style="text-align:left;">
+kg CO2e
+</td>
+<td style="text-align:left;">
+Entertainment
+</td>
+<td style="text-align:right;">
+46
+</td>
+<td style="text-align:right;">
+4.39
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+GHG emissions
+</td>
+<td style="text-align:left;">
+kg CO2e
+</td>
+<td style="text-align:left;">
+Food &amp; dining
+</td>
+<td style="text-align:right;">
+1500
+</td>
+<td style="text-align:right;">
+398.50
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+GHG emissions
+</td>
+<td style="text-align:left;">
+kg CO2e
+</td>
+<td style="text-align:left;">
+Grooming
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:right;">
+7.40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+GHG emissions
+</td>
+<td style="text-align:left;">
+kg CO2e
+</td>
+<td style="text-align:left;">
+Health care
+</td>
+<td style="text-align:right;">
+1500
+</td>
+<td style="text-align:right;">
+228.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+GHG emissions
+</td>
+<td style="text-align:left;">
+kg CO2e
+</td>
+<td style="text-align:left;">
+Transportation
+</td>
+<td style="text-align:right;">
+300
+</td>
+<td style="text-align:right;">
+88.90
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+GHG emissions
+</td>
+<td style="text-align:left;">
+kg CO2e
+</td>
+<td style="text-align:left;">
+Utilities
+</td>
+<td style="text-align:right;">
+493
+</td>
+<td style="text-align:right;">
+547.62
+</td>
+</tr>
+</tbody>
+</table>
+
+
+<!-- rnb-html-end -->
+
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>ok, i have previewed the processing!</p>
+<p>next session I should</p>
+<ul>
+<li>preview some illustrations</li>
+<li>start putting this stuff in the app</li>
 </ul>
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIkRldmVsb3BpbmcgYSBwdXJjaGFzaW5nIGltcGFjdHMgYXBwIGJhc2VkIG9uIFVTRUVJTyBpbXBhY3QgaW50ZW5zaXRpZXMiDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQpieSBbTWFydGluIEJyb3duXShtYWlsdG86Ok1hcnRpbi5Ccm93bkBzdGF0ZS5vci51cykNCg0KIyMjIEludHJvZHVjdGlvbg0KDQpJbiB0aGlzIFIgTWFya2Rvd24gd29ya2Jvb2sgSSdtIGdvaW5nIHRvIGRldmVsb3AgYSBTaGlueSBhcHAgdGhhdCB0YWtlcyBzcGVuZGluZyBkYXRhLCBleHByZXNzZWQgaW4gQkVBL05BSUNTIGNhdGVnb3JpZXMsIGFuZCBjb252ZXJ0cyB0aG9zZSBkYXRhIHRvIGVzdGltYXRlZCBzdXBwbHkgY2hhaW4gKFNjb3BlIDMpIGVudmlyb25tZW50YWwgaW1wYWN0cywgYmFzZWQgb24gaW1wYWN0IGludGVuc2l0aWVzIGZvdW5kIGluIHRoZSBVU0VFSU8gbW9kZWwuDQoNCkZvciB0aGUgdGltZSBiZWluZyB0aGUgb25seSBpbXBhY3QgY2F0ZWdvcnkgcmVwb3J0ZWQgb24gd2lsbCBiZSBncmVlbmhvdXNlIGdhcyBlbWlzc2lvbnMsIGJlY2F1c2UgdGhlIEVQQSBoYXMgcmVjZW50bHkgcHVibGlzaGVkIGEgW2NvbnZlbmllbnQgc2V0IG9mIGltcGFjdCBpbnRlbnNpdGllcyBmb3IgZ3JlZW5ob3VzZSBnYXNlc10oaHR0cHM6Ly9jZnB1Yi5lcGEuZ292L3NpL3NpX3B1YmxpY19yZWNvcmRfUmVwb3J0LmNmbT9kaXJFbnRyeUlkPTM0OTMyNCZMYWI9Q0VTRVIpLiAgQnV0IEkgd2lsbCB0cnkgdG8gc3RydWN0dXJlIGl0IHNvIHRoYXQgaWYgb3RoZXIgaW1wYWN0IGNhdGVnb3JpZXMgYmVjb21lIGRvYWJsZSBpbiB0aGUgZnV0dXJlLCB0aGV5IGNhbiBiZSBhZGRlZCBlYXNpbHkuDQoNCiMjIyBUcmFja3Mgb2Ygd29yaw0KDQpUbyBtYWtlIHRoZSBhcHAsIEknbGwgaGF2ZSB0byBjb21iaW5lIHNldmVyYWwgc2V0cyBvZiBkYXRhIGFuZCB0cmFja3Mgb2Ygd29yay4NCg0KVG8gb3V0cHV0IGVzdGltYXRlZCBzdXBwbHkgY2hhaW4gZW1pc3Npb25zLCBiYXNlZCBvbiBkb2xsYXJzIGV4cGVuZGVkLCBJIG5lZWQgdG8gY29tYmluZToNCg0KKiBlbWlzc2lvbnMgaW50ZW5zaXR5IGRhdGEsIGZyb20gdGhlIEVQQSdzIHB1YmxpY2F0aW9ucy4gIFRoaXMgaXMgZWFzeSB0byBkb3dubG9hZCBidXQgbmVlZHMgdG8gYmUgZmlsdGVyZWQgYW5kIHJlZm9ybWVkIGJlZm9yZSBpdCdzIHVzZWQgaW4gdGhlIGFwcC4NCiogZ2xvYmFsIHdhcm1pbmcgcG90ZW50aWFsIGRhdGEuICBJIGRlZmluaXRlbHkgd2FudCB0byBnaXZlIHNvbWUgb3B0aW9ucyBoZXJlLg0KKiBzcGVuZGluZyBkYXRhLCBmcm9tIE9yZWdvbiBvciBhbnkgb3RoZXIgc291cmNlLCBidXQgaW4gY2F0ZWdvcmllcyBjb21wYXRpYmxlIHdpdGggdGhlIEVQQSdzIGVtaXNzaW9ucyBpbnRlbnNpdGllcw0KDQpTbyBpbiBnZW5lcmFsLCBpbXBhY3Q9c3BlbmRpbmcgaW4gZG9sbGFycyB4IGVtaXNzaW9ucyBpbnRlbnNpdHkgKHRvbnMgZW1pdHRlZC9kb2xsYXIpIHggZ2xvYmFsIHdhcm1pbmcgcG90ZW50aWFsICh1bml0bGVzcykuDQoNCkJ1dCB0byBtYWtlIHRoYXQgaGFwcGVuIGluIHRoZSBhcHAsDQoNCiogdGhlIGVtaXNzaW9ucyBpbnRlbnNpdHkgZGF0YSBuZWVkcyB0byBiZSBpbiBhIGZpbHRlcmVkIHRpZHkgZGF0YSBmcmFtZQ0KKiB0aGUgc3BlbmRpbmcgZGF0YSBoYXMgdG8gYmUgdXBsb2FkZWQgYW5kIGNoZWNrZWQgZm9yIGNvbXBhdGliaWxpdHkgKGluc2lkZSB0aGUgYXBwKQ0KKiBhIG51bWJlciBvZiBnbG9iYWwgd2FybWluZyBwb3RlbnRpYWwgcHJvZmlsZXMgaGF2ZSB0byBiZSBhdmFpbGFibGUNCg0KIyMjIFNldCB1cA0KDQpgYGB7cn0NCiMgbG9hZCBwYWNrYWdlcyBJIGxpa2UgdG8gdXNlDQpsaWJyYXJ5KGNoZWNrcG9pbnQpDQpsaWJyYXJ5KHRpZHl2ZXJzZSkNCmxpYnJhcnkocmVhZHhsKQ0KbGlicmFyeShrYWJsZUV4dHJhKQ0KDQojIHVzZSBwYWNrYWdlcyBhcyBvZiBhIGNlcnRhaW4gcmVmZXJlbmNlIGRhdGUNCmNoZWNrcG9pbnQoc25hcHNob3RfZGF0ZSA9ICIyMDIxLTA2LTE1IikNCg0KIyBzZWUgd2hhdCBteSB3b3JraW5nIGRpcmVjdG9yeSBpcw0KZ2V0d2QoKQ0KYGBgDQoNCiMjIyBFbWlzc2lvbnMgaW50ZW5zaXRpZXMNCg0KSSd2ZSBkb3dubG9hZGVkIHRoZSBFUEEncyBnaGcgZW1pc3Npb25zIGludGVuc2l0aWVzIGZyb20gdGhlIHdlYi4gIEkgbmVlZCB0byBjaG9vc2UgdGhlIHNoZWV0KHMpIG1vc3QgcmVsZXZhbnQgdG8gbWUsIGRvd25sb2FkIHRoZSBkYXRhLCBhbmQgdGlkeSBpdC4gIE1heWJlIGFsb25nIHRoZSB3YXkgSSdsbCBwcmludCBvdXQgc29tZSBvZiB0aGUgZG9jdW1lbnRhdGlvbiBzaGVldHMuDQoNCmBgYHtyfQ0KIyBzZXQgRVBBIGdoZyBmaWxlc3BlYw0KZXBhR0hHZGF0YUZpbGVTcGVjIDwtDQogICJzb3VyY2VfZGF0YS9TdXBwbHlDaGFpbkVtaXNzaW9uRmFjdG9yc2ZvclVTSW5kdXN0cmllc0NvbW1vZGl0aWVzLnhsc3giDQojIGZpbmQgb3V0IHdoYXQgc2hlZXRzIGFyZSB0aGVyZQ0KZXBhR0hHZGF0YUF2YWlsYWJsZVNoZWV0cyA8LQ0KICBleGNlbF9zaGVldHMocGF0aD1lcGFHSEdkYXRhRmlsZVNwZWMpDQprYWJsZSgNCiAgYXMuZGF0YS5mcmFtZShlcGFHSEdkYXRhQXZhaWxhYmxlU2hlZXRzKSwgDQogIGNhcHRpb249ImF2YWlsYWJsZSBzaGVldHMiDQopDQpgYGANClNpbmNlIG15IGdvYWwgaXMgdG8gZmluZCB0aGUgc3VwcGx5IGNoYWluIGVtaXNzaW9ucyBvZiBwdXJjaGFzZXMsIGl0IHNlZW1zIHJpZ2h0IHRvIHVzZSB0aGUgQ29tbW9kaXR5IGJhc2VkIHRhYmxlcy4gIFdoaWNoIG9mIHRoZSBtYW55IGNvbW1vZGl0eSBvcHRpb25zIHNob3VsZCBJIGNob29zZT8gIA0KDQpUaGUgeWVhciByZWNvcmRzIGFyZSBhIGJpdCBjb25mdXNpbmcsIGJ1dCBJIHRoaW5rIHRoZXkgcmVmZXIgdG8gdmVyc2lvbnMgb2YgdGhlIEkvTyB0YWJsZXMuICBBbGwgb2YgdGhlIGVtaXNzaW9ucyBpbnRlbnNpdGllcyBhcmUgaW4ga2cgcGVyIDIwMTggZG9sbGFycy4gIFRPIERPOiBGSU5EIE9VVCBXSEFUIFRIRSBESUZGRVJFTlQgWUVBUlMgUkVQUkVTRU5ULg0KDQpCdXQ6IGFzc3VtaW5nIEkgd2FudCB0aGUgbW9zdCByZWNlbnQsIHdoYXQgSSBzaG91bGQgaW1wb3J0IGlzOg0KDQoqIDIwMTZfU3VtbWFyeV9Db21tb2RpdHkNCiogMjAxNl9EZXRhaWxfQ29tbW9kaXR5DQoNCmBgYHtyfQ0KIyBpbXBvcnQgbXkgc2hlZXRzIG9mIGludGVyZXN0DQplcGFHSEdkYXRhU2V0MXJhdyA8LQ0KICByZWFkX2V4Y2VsKA0KICAgIHBhdGg9ZXBhR0hHZGF0YUZpbGVTcGVjLA0KICAgIHNoZWV0PSIyMDE2X1N1bW1hcnlfQ29tbW9kaXR5Ig0KICApDQplcGFHSEdkYXRhU2V0MnJhdyA8LQ0KICByZWFkX2V4Y2VsKA0KICAgIHBhdGg9ZXBhR0hHZGF0YUZpbGVTcGVjLA0KICAgIHNoZWV0PSIyMDE2X0RldGFpbF9Db21tb2RpdHkiDQogICkNCmBgYA0KDQpMb29rcyBsaWtlIHRoZXJlIGlzIGEgZGF0YSBkaWN0aW9uYXJ5IEkgbWlnaHQgd2FudCB0byBwcmludCBvdXQgZm9yIHRoZSByZWNvcmQuICBUaGVzZSBhcmUgdGhlIGZpZWxkIG5hbWVzIGluIHRoZSBFeGNlbCB0YWJsZXMuDQoNCmBgYHtyfQ0KZXBhR0hHZGF0YURpY3Rpb25hcnkgPC0NCiAgcmVhZF9leGNlbChwYXRoPWVwYUdIR2RhdGFGaWxlU3BlYywgc2hlZXQ9IkRhdGEgRGljdGlvbmFyeSIpDQprYWJsZShlcGFHSEdkYXRhRGljdGlvbmFyeSkgJT4lIA0KICBrYWJsZV9zdHlsaW5nKGJvb3RzdHJhcF9vcHRpb25zID0gImJvcmRlcmVkIikNCmBgYA0KDQpJJ20gbm90IGdvaW5nIHRvIG5lZWQgYWxsIHRob3NlIGZpZWxkcy4gIExldCdzIHNlbGVjdCBhbmQgcmVuYW1lIGZpZWxkcy4NCg0KYGBge3J9DQojIHNlbGVjdCBkZXNpcmVkIGZpZWxkcyBhbmQgcmVuYW1lIHRoZW0gZm9yIGJyZXZpdHkNCmVwYUdIR2RhdGFTZXQxIDwtDQogIGVwYUdIR2RhdGFTZXQxcmF3ICU+JQ0KICBzZWxlY3QoDQogICAgYENvbW1vZGl0eSBDb2RlYCwNCiAgICBgQ29tbW9kaXR5IE5hbWVgLA0KICAgIGBTdWJzdGFuY2VgLA0KICAgIGBVbml0YCwNCiAgICBgU3VwcGx5IENoYWluIEVtaXNzaW9uIEZhY3RvcnMgd2l0aG91dCBNYXJnaW5zYA0KICApICU+JQ0KICByZW5hbWUoDQogICAgYmVhQ29kZT1gQ29tbW9kaXR5IENvZGVgLA0KICAgIGJlYU5hbWU9YENvbW1vZGl0eSBOYW1lYCwNCiAgICBzdWJzdGFuY2U9U3Vic3RhbmNlLA0KICAgIHVuaXQ9VW5pdCwNCiAgICBpbXBGYWN0b3I9YFN1cHBseSBDaGFpbiBFbWlzc2lvbiBGYWN0b3JzIHdpdGhvdXQgTWFyZ2luc2ANCiAgKQ0KZXBhR0hHZGF0YVNldDIgPC0NCiAgZXBhR0hHZGF0YVNldDJyYXcgJT4lDQogIHNlbGVjdCgNCiAgICBgQ29tbW9kaXR5IENvZGVgLA0KICAgIGBDb21tb2RpdHkgTmFtZWAsDQogICAgYFN1YnN0YW5jZWAsDQogICAgYFVuaXRgLA0KICAgIGBTdXBwbHkgQ2hhaW4gRW1pc3Npb24gRmFjdG9ycyB3aXRob3V0IE1hcmdpbnNgDQogICkgJT4lIA0KICByZW5hbWUoDQogICAgYmVhQ29kZT1gQ29tbW9kaXR5IENvZGVgLA0KICAgIGJlYU5hbWU9YENvbW1vZGl0eSBOYW1lYCwNCiAgICBzdWJzdGFuY2U9U3Vic3RhbmNlLA0KICAgIHVuaXQ9VW5pdCwNCiAgICBpbXBGYWN0b3I9YFN1cHBseSBDaGFpbiBFbWlzc2lvbiBGYWN0b3JzIHdpdGhvdXQgTWFyZ2luc2ANCiAgKQ0KYGBgDQoNCk5vdyBJIGtub3cgSSB3b3VsZCBsaWtlIHRvIGNvbWJpbmUgdGhlc2UgdHdvIHRhYmxlcyAtLSBzbyB0aGF0IHVzZXJzIGNhbiBlbnRlciBleHBlbmRpdHVyZXMgaW4gZWl0aGVyIGRldGFpbCBvciBzdW1tYXJ5IGxldmVscyBvZiBkZXRhaWwgKGFuZCBtaXggYW5kIG1hdGNoKS4gIFRoYXQgd2lsbCBiZSBtb3N0IGNvbnZlbmllbnQgaWYgdGhlIGJlYUNvZGVzIGFuZCBiZWFOYW1lcyBkbyBub3Qgb3ZlcmxhcCBiZXR3ZWVuIHRoZSB0d28gdGFibGVzLiAgTGV0J3MgY2hlY2suDQoNCmBgYHtyfQ0KZXBhR0hHYmVhQ29kZXMxIDwtDQogIGVwYUdIR2RhdGFTZXQxICU+JSBzZWxlY3QoYmVhQ29kZSkgJT4lIGRpc3RpbmN0KCkgDQplcGFHSEdiZWFDb2RlczIgPC0NCiAgZXBhR0hHZGF0YVNldDIgJT4lIHNlbGVjdChiZWFDb2RlKSAlPiUgZGlzdGluY3QoKQ0KaW5uZXJfam9pbigNCiAgZXBhR0hHYmVhQ29kZXMyICwNCiAgZXBhR0hHYmVhQ29kZXMxICwNCiAgYnk9ImJlYUNvZGUiDQopICU+JSBwcmludCgpDQpgYGANCg0Kd2hldywgaXQgbG9va3MgbGlrZSBub25lIG92ZXJsYXAuICBMZXQncyB0cnkgdGhlIGNvbW1vZGl0eSBuYW1lcy4NCg0KYGBge3J9DQplcGFHSEdiZWFOYW1lczEgPC0NCiAgZXBhR0hHZGF0YVNldDEgJT4lIHNlbGVjdChiZWFOYW1lKSAlPiUgZGlzdGluY3QoKSANCmVwYUdIR2JlYU5hbWVzMiA8LQ0KICBlcGFHSEdkYXRhU2V0MiAlPiUgc2VsZWN0KGJlYU5hbWUpICU+JSBkaXN0aW5jdCgpDQppbm5lcl9qb2luKA0KICBlcGFHSEdiZWFOYW1lczIgJT4lIG11dGF0ZShsZXZlbD0iZGV0YWlsIiksDQogIGVwYUdIR2JlYU5hbWVzMSAlPiUgbXV0YXRlKGxldmVsPSJzdW1tYXJ5IiksDQogIGJ5PSJiZWFOYW1lIg0KKSAlPiUgcHJpbnQoKQ0KYGBgDQoNCg0KTG9va3MgbGlrZSB0aGVyZSBpcyBhIGxpdHRsZSBvdmVybGFwIGluIHRoZSBuYW1lcy4gIEJ1dCBub3QgaW4gdGhlIGNvZGVzLiAgU28gaWYgSSB1c2UgY29kZXMgYXMgdGhlIGtleSB2YXJpYWJsZSB0aGVuIGl0IHdvbid0IG1hdHRlci4gIA0KIEkgY291bGQgYWxzbyB2aXN1YWxseSBpbmRpY2F0ZSB0aGUgc3VtbWFyeSBsZXZlbCB0ZXh0dWFsbHkgLS0gYWxsIGNhcHMgbWF5YmU/DQogDQpMZXQncyB0cnkgY29tYmluaW5nIHRoZSBuYW1lcyBhbmQgcHJpbnRpbmcgdGhlbSBvdXQgYXMgYSB0YWJsZS4NCg0KYGBge3J9DQojIG1ha2UgYSBjb21iaW5lZCBlcGEgY29tbW9kaXR5IHRhYmxlDQplcGFBbGxDb21tb2RpdHlUYWJsZSA8LQ0KICBiaW5kX3Jvd3MoDQogICAgZXBhR0hHZGF0YVNldDEgJT4lDQogICAgICBzZWxlY3QoYmVhQ29kZSwgYmVhTmFtZSkgJT4lDQogICAgICBtdXRhdGUoDQogICAgICAgIGR0bEx2bD0ic3VtbWFyeSIsDQogICAgICAgIGJlYU5hbWU9c3RyX3RvX3VwcGVyKGJlYU5hbWUpDQogICAgICApICU+JQ0KICAgICAgZGlzdGluY3QoKSwNCiAgICBlcGFHSEdkYXRhU2V0MiAlPiUNCiAgICAgIHNlbGVjdChiZWFDb2RlLCBiZWFOYW1lKSAlPiUNCiAgICAgIG11dGF0ZShkdGxMdmw9ImRldGFpbCIpICU+JQ0KICAgICAgZGlzdGluY3QoKQ0KICApICU+JQ0KICBhcnJhbmdlKGJlYUNvZGUsIGJlYU5hbWUpDQprYWJsZShlcGFBbGxDb21tb2RpdHlUYWJsZSkgJT4lDQogIGthYmxlX3N0eWxpbmcoYm9vdHN0cmFwX29wdGlvbnMgPSAicmVzcG9uc2l2ZSIpDQpgYGANCldlbGwsIHdoYXQgdGhpcyB0ZWxscyBtZSBpcyB0aGF0IEkgY2FuIGRlZmluaXRlbHkgYWRkIHRoZSB0d28gdGFibGVzIHRvZ2V0aGVyLiAgQnV0IEkgbmVlZCB0byBwcmVzZXJ2ZSB0aGUgYmVhQ29kZSBhbmQgKHByb2JhYmx5IGZvciBjbGFyaXR5KSBhbHNvIHByZXNlcnZlIHRoZSBkdGxMdmwgYW5kIGFsc28gbWFyayBvZmYgdGhlIHN1bW1hcnkgbGV2ZWwgc29tZWhvdyAoYXMgd2l0aCBhbGwgY2FwcykuDQoNCkFsbCByaWdodCBsZXQncyBtYWtlIGl0Lg0KDQpgYGB7cn0NCiMgbWFrZSB0aGUgY29tYmluZWQgaW1wYWN0IGludGVuc2l0aWVzIHRhYmxlDQplcGFHSEdpbXBhY3RJbnRlbnNpdGllcyA8LQ0KICBiaW5kX3Jvd3MoDQogICAgZXBhR0hHZGF0YVNldDEgJT4lDQogICAgICBtdXRhdGUoDQogICAgICAgIGR0bEx2bD0ic3VtbWFyeSIsDQogICAgICAgIGJlYU5hbWU9c3RyX3RvX3VwcGVyKGJlYU5hbWUpDQogICAgICApLA0KICAgIGVwYUdIR2RhdGFTZXQyICU+JQ0KICAgICAgbXV0YXRlKA0KICAgICAgICBkdGxMdmw9ImRldGFpbCINCiAgICAgICkNCiAgKSAlPiUNCiAgYXJyYW5nZShiZWFDb2RlLCBiZWFOYW1lLCBzdWJzdGFuY2UpDQpgYGANCg0KU28gb2JqZWN0IGVwYUdIR2ltcGFjdEludGVuc2l0aWVzIGlzIHdoYXQgSSdsbCB1c2UuDQoNCmBgYHtyfQ0KIyBjbGVhbiB1cCB3b3Jrc3BhY2UgYnkgZGVsZXRpbmcgbW9zdCBvYmplY3RzDQpybSgNCiAgbGlzdD0NCiAgICBzZXRkaWZmKA0KICAgICAgbHMoKSwNCiAgICAgIGMoImVwYUdIR2ltcGFjdEludGVuc2l0aWVzIiwgImVwYUdIR2RhdGFEaWN0aW9uYXJ5IikNCiAgKQ0KKQ0KYGBgDQoNCiMjIyBpbXBvcnRpbmcgdGhlIHNwZW5kaW5nIGRhdGEuDQoNCkluIHRoZSBhcHAgSSBuZWVkIHRvIGltcG9ydCBhIHVzZXIncyBmaWxlIGFuZCB0aGVuIGNoZWNrIHRoYXQgdGhlaXIgZGF0YSBtZWV0cyB0aGUgYWNjZXB0YWJsZSBjYXRlZ29yaWVzLg0KDQpTbyBsZXQncyBkZXZlbG9wIHRoZSBhY2NlcHRhYmxlIGxpc3QgZmlyc3QuDQoNCmBgYHtyfQ0KIyBtYWtlIGFjY2VwdGFibGUgc3BlbmRpbmcgY2F0ZWdvcnkgZGF0YSBmcmFtZSAmIHNhdmUgaXQgYXMgZGlzayBmaWxlDQpva1NwZW5kaW5nQ2F0cyA8LQ0KICBlcGFHSEdpbXBhY3RJbnRlbnNpdGllcyAlPiUNCiAgc2VsZWN0KGJlYUNvZGUsIGJlYU5hbWUsIGR0bEx2bCkgJT4lDQogIGRpc3RpbmN0KCkgJT4lDQogIGFycmFuZ2UoYmVhQ29kZSwgYmVhTmFtZSkNCnNhdmVSRFMob2tTcGVuZGluZ0NhdHMsICJpbnRlcm1lZGlhdGVfZGF0YS9va1NwZW5kaW5nQ2F0cy5SRGF0YSIpDQpgYGANCg0KTm93LCBpbiBhIHNvbWV3aGF0IG5vbi1yZXByb2R1Y2libGUgc3RlcCwgSSdtIGdvaW5nIHRvIGNyZWF0ZSBhbiBFeGNlbCB0ZW1wbGF0ZSB0byBhbGxvdyBwZW9wbGUgdG8gZW50ZXIgc3BlbmRpbmcgZGF0YSBpbiBhbiBhY2NlcHRhYmxlIGZvcm1hdC4gIEl0IGlzIGF2YWlsYWJsZSBpbiB0aGUgInNvdXJjZV9kYXRhIiBmb2xkZXIgYXMgInVzZXJzX3NwZW5kaW5nX2RhdGFfYmxhbmsueGxzeCIuICBUaGlzIG1heSBiZSBjb3BpZWQgYW5kIGFsdGVyZWQgYnkgdXNlcnMgYW5kIHVwbG9hZGVkIHRvIHRoZSBhcHAuDQoNCk5vdyBJJ3ZlIGdvdCB0byB0YWtlIHNvbWUgc3BlbmRpbmcgZGF0YSBhbmQgc2VlIGhvdyBpdCBtYXRjaGVzIHVwLiAgTW9yZSBnZW5lcmFsbHksIEkndmUgZ290IHRvIGZpZ3VyZSBvdXQgaG93IHRvICJ2YWxpZGF0ZSIgdGhlIGluY29taW5nIGRhdGEuLi4gDQoNCiogaXMgaXQgaW4gdGhlIHJpZ2h0IGZvcm1hdD8gKGUuZy4gY29kZXMgYXMgdGV4dCwgc3BlbmRpbmcgYXMgaW50ZWdlcikNCiogZG8gYWxsIHRoZSBjb2RlcyBoYXZlIGVudHJpZXMgaW4gdGhlIG9rU3BlbmRpbmdDYXRzPw0KDQpMZXQncyB0cnkgaXQgd2l0aCB0d28gZGlmZmVyZW50IGRhdGEgZmlsZXMuDQoNCiogUml2aW4ncyBPcmVnb24gc3BlbmRpbmcgZGF0YSBmaWxlIHByb2R1Y2VkIGluIDIwMjAgKGZyb20gYW4gb2Jzb2xldGUgdmVyc2lvbiBvZiB0aGlzIGFuYWx5c2lzKQ0KKiBBIGZpY3Rpb25hbCBzcGVuZGluZyBkYXRhIGZpbGUgdXNpbmcgdGhlIHRlbXBsYXRlIHByb2R1Y2VkIGFib3ZlLg0KDQpgYGB7cn0NCiMgZ2V0IFJpdmluJ3MgZHJhZnQgc3BlbmRpbmcgZmlsZSwgY2lyY2EgMjAyMA0KZXhhbXBsZVNwZW5kaW5nRGF0YTEgPC0NCiAgcmVhZF9leGNlbCgNCiAgICBwYXRoPSIuLi9xdWljay1wdXJjaGFzaW5nLWltcGFjdHMvc291cmNlX2RhdGEvb3JlZ29uX3NwZW5kaW5nXzIwMjBfMDRfMjMueGxzeCIsDQogICAgc2hlZXQ9Im1hcnRpbjUiLA0KICAgIHNraXA9NCwNCiAgICBjb2xfbmFtZXMgPSBUUlVFLA0KICAgIGNvbF90eXBlcyA9IGMoInRleHQiLCAidGV4dCIsICJ0ZXh0IiwgIm51bWVyaWMiKQ0KICApICU+JQ0KICByZW5hbWUoDQogICAgdXNlckNhdGVnb3J5PWBERVEgQ2F0ZWdvcnlgLA0KICAgIGJlYUNvZGU9YEJBRSAgQ29kZWAsDQogICAgdXNlclNwZW5kaW5nPWBCRUEgY29zdGANCiAgKSAlPiUNCiAgc2VsZWN0KGJlYUNvZGUsIHVzZXJTcGVuZGluZywgdXNlckNhdGVnb3J5KSAlPiUNCiAgZmlsdGVyKHVzZXJTcGVuZGluZyA+IDApICU+JQ0KICBtdXRhdGUoDQogICAgIyBhIG1hbnVhbCBlZGl0IGJhc2VkIG9uIGEgdHlwbyBkaXNjb3ZlcmVkIGJlbG93DQogICAgYmVhQ29kZT1pZmVsc2UoYmVhQ29kZT09IkdTTEdIIiwgIjU0MTJPUCIsIGJlYUNvZGUpDQogICkgJT4lDQogIGFycmFuZ2UoYmVhQ29kZSwgZGVzYyh1c2VyU3BlbmRpbmcpKQ0KDQojIHByaW50IG91dCByb3dzIG9mIHNwZW5kaW5nIGRhdGENCnByaW50KG5yb3coZXhhbXBsZVNwZW5kaW5nRGF0YTEpKQ0KDQojIGNvdW50IGhvdyBtYW55IHJvd3Mgam9pbiBiYXNlZCBvbiBiZWFDb2RlDQpzZW1pX2pvaW4oDQogIGV4YW1wbGVTcGVuZGluZ0RhdGExLA0KICBva1NwZW5kaW5nQ2F0cywNCiAgYnk9ImJlYUNvZGUiDQopICU+JSBucm93KCkgJT4lIHByaW50KCkNCg0KIyBwcmludCBvdXQgcm93cyB0aGF0IGRvbid0IG1hdGNoDQphbnRpX2pvaW4oDQogIGV4YW1wbGVTcGVuZGluZ0RhdGExLA0KICBva1NwZW5kaW5nQ2F0cywNCiAgYnk9ImJlYUNvZGUiDQopICU+JSANCmthYmxlKCkgJT4lIGthYmxlX3N0eWxpbmcoYm9vdHN0cmFwX29wdGlvbnMgPSAicmVzcG9uc2l2ZSIpDQpgYGANCg0KR29vZCBuZXdzIC0tIG5lYXJseSBldmVyeXRoaW5nIG1hdGNoZWQgdXAuICBUaGUgZXhhbWluYXRpb24gYWJvdmUgdW5jb3ZlcmVkIGp1c3Qgb25lIG1pc21hdGNoLCB3aGljaCBJIGZvdW5kIGEgcmVhc29uYWJsZSBzdWJzdGl0dXRlIGZvci4NCg0KT2ssIGxldCdzIHRyeSB0aGUgdGVtcGxhdGUgSSBjcmVhdGVkLg0KDQpgYGB7cn0NCiMgaW1wb3J0IHNwcmVhZHNoZWV0IHdpdGggc3BlbmRpbmcgZGF0YQ0KZXhhbXBsZVNwZW5kaW5nRGF0YTIgPC0NCiAgcmVhZF9leGNlbCgNCiAgICBwYXRoPSJzb3VyY2VfZGF0YS91c2Vyc19zcGVuZGluZ19kYXRhX3NhbXBsZS54bHN4IiwNCiAgICBza2lwPTExLA0KICAgIGNvbF9uYW1lcyA9IFRSVUUNCiAgKSAlPiUNCiAgc2VsZWN0KGJlYUNvZGUsIHVzZXJTcGVuZGluZywgdXNlckNhdGVnb3J5KSAlPiUNCiAgZmlsdGVyKHVzZXJTcGVuZGluZyA+IDApICU+JQ0KICBtdXRhdGUoDQogICAgIyB1c2UgdGhpcyBzcGFjZSBmb3IgbWFudWFsIGVkaXRzDQogICkgJT4lDQogIGFycmFuZ2UoYmVhQ29kZSwgZGVzYyh1c2VyU3BlbmRpbmcpKQ0KDQojIHByaW50IG91dCByb3dzIG9mIHNwZW5kaW5nIGRhdGENCnByaW50KG5yb3coZXhhbXBsZVNwZW5kaW5nRGF0YTIpKQ0KDQojIGNvdW50IGhvdyBtYW55IHJvd3Mgam9pbiBiYXNlZCBvbiBiZWFDb2RlDQpzZW1pX2pvaW4oDQogIGV4YW1wbGVTcGVuZGluZ0RhdGEyLA0KICBva1NwZW5kaW5nQ2F0cywNCiAgYnk9ImJlYUNvZGUiDQopICU+JSBucm93KCkgJT4lIHByaW50KCkNCg0KIyBwcmludCBvdXQgcm93cyB0aGF0IGRvbid0IG1hdGNoDQphbnRpX2pvaW4oDQogIGV4YW1wbGVTcGVuZGluZ0RhdGExLA0KICBva1NwZW5kaW5nQ2F0cywNCiAgYnk9ImJlYUNvZGUiDQopICU+JSANCmthYmxlKCkgJT4lIGthYmxlX3N0eWxpbmcoYm9vdHN0cmFwX29wdGlvbnMgPSAicmVzcG9uc2l2ZSIpDQpgYGANCkxvb2tzIGxpa2UgdGhhdCdzIHRoZSB3YXkgdG8gZG8gaXQuDQoNCiogbG9hZCBpbiB0aGUgdGFibGUNCiogcmVkdWNlIHRvIHRob3NlIDMgc3RhbmRhcmQgZmllbGRzDQoqIGNoZWNrIGZvciBzZW1pX2pvaW5zIGFuZCBhbnRpX2pvaW5zDQoqIHByaW50IG91dCBhbnkgYW50aV9qb2lucw0KDQpBdCB0aGlzIG1vbWVudCBJJ20gZ29pbmcgdG8gY3JlYXRlIHRoZSBmaWxlIGZvciB0aGUgc2hpbnkgYXBwIHRvIHNlZSBpZiBJIGNhbiB1cGxvYWQgZGF0YSBpbiB0aGUgZm9ybSBvZiB0aGUgdGVtcGxhdGUuDQoNCi4uLg0KDQpMb29rcyBsaWtlIEkgZ290IHRoYXQgd29ya2luZy4gIEknbSBnb2luZyB0byBoYXZlIHRvIGFkZCBhIGxvdCBvZiBmZWF0dXJlcyBsYXRlciwgbGlrZQ0KDQoqIGFkZGl0aW9uYWwgdmFsaWRhdGlvbg0KKiBhbiBleGFtcGxlIGZpbGUgdG8gZG93bmxvYWQNCiogY2hvaWNlIG9mIHVzaW5nIHByZXNldCBkYXRhIGZyb20gT1JlZ29uDQoNCmJ1dCB0aGF0IGNhbiBnbyBsYXRlci4NCg0KDQoNCg0KDQojIyMgZ2xvYmFsIHdhcm1pbmcgcG90ZW50aWFscw0KDQpwZXRlciBjYW5lcGEgZ2F2ZSBtZSBzb21lIGFyNSAyMCAmIDEwMCB5ZWFyDQoNCkp1c3Qgbm90aWNlZCBzb21ldGhpbmcgaW4gdGhlIGVwYSB0YWJsZXMuICBGb3IgdGhlICJvdGhlciBnYXNlcyIgdGhleSBoYXZlIGFscmVhZHkgcHJvdmlkZWQgYSBnd3AuICBJIHNob3VsZA0KDQoqIGNvbmZpcm0gdGhhdCdzIHdoYXQgdGhleSdyZSBkb2luZw0KKiBkZWNpZGUgd2hldGhlciB0byBqdXN0IGFjY2VwdCB3aGF0IHRoZXkndmUgZG9uZQ0KKiBkZWNpZGUgaWYgSSB3YW50IHRvIGFsdGVyIGl0DQoNCg==</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIkRldmVsb3BpbmcgYSBwdXJjaGFzaW5nIGltcGFjdHMgYXBwIGJhc2VkIG9uIFVTRUVJTyBpbXBhY3QgaW50ZW5zaXRpZXMiDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQpieSBbTWFydGluIEJyb3duXShtYWlsdG86Ok1hcnRpbi5Ccm93bkBzdGF0ZS5vci51cykNCg0KIyMjIEludHJvZHVjdGlvbg0KDQpJbiB0aGlzIFIgTWFya2Rvd24gd29ya2Jvb2sgSSdtIGdvaW5nIHRvIGRldmVsb3AgYSBTaGlueSBhcHAgdGhhdCB0YWtlcyBzcGVuZGluZyBkYXRhLCBleHByZXNzZWQgaW4gQkVBL05BSUNTIGNhdGVnb3JpZXMsIGFuZCBjb252ZXJ0cyB0aG9zZSBkYXRhIHRvIGVzdGltYXRlZCBzdXBwbHkgY2hhaW4gKFNjb3BlIDMpIGVudmlyb25tZW50YWwgaW1wYWN0cywgYmFzZWQgb24gaW1wYWN0IGludGVuc2l0aWVzIGZvdW5kIGluIHRoZSBVU0VFSU8gbW9kZWwuDQoNCkZvciB0aGUgdGltZSBiZWluZyB0aGUgb25seSBpbXBhY3QgY2F0ZWdvcnkgcmVwb3J0ZWQgb24gd2lsbCBiZSBncmVlbmhvdXNlIGdhcyBlbWlzc2lvbnMsIGJlY2F1c2UgdGhlIEVQQSBoYXMgcmVjZW50bHkgcHVibGlzaGVkIGEgW2NvbnZlbmllbnQgc2V0IG9mIGltcGFjdCBpbnRlbnNpdGllcyBmb3IgZ3JlZW5ob3VzZSBnYXNlc10oaHR0cHM6Ly9jZnB1Yi5lcGEuZ292L3NpL3NpX3B1YmxpY19yZWNvcmRfUmVwb3J0LmNmbT9kaXJFbnRyeUlkPTM0OTMyNCZMYWI9Q0VTRVIpLiAgQnV0IEkgd2lsbCB0cnkgdG8gc3RydWN0dXJlIGl0IHNvIHRoYXQgaWYgb3RoZXIgaW1wYWN0IGNhdGVnb3JpZXMgYmVjb21lIGRvYWJsZSBpbiB0aGUgZnV0dXJlLCB0aGV5IGNhbiBiZSBhZGRlZCBlYXNpbHkuDQoNCiMjIyBUcmFja3Mgb2Ygd29yaw0KDQpUbyBtYWtlIHRoZSBhcHAsIEknbGwgaGF2ZSB0byBjb21iaW5lIHNldmVyYWwgc2V0cyBvZiBkYXRhIGFuZCB0cmFja3Mgb2Ygd29yay4NCg0KVG8gb3V0cHV0IGVzdGltYXRlZCBzdXBwbHkgY2hhaW4gZW1pc3Npb25zLCBiYXNlZCBvbiBkb2xsYXJzIGV4cGVuZGVkLCBJIG5lZWQgdG8gY29tYmluZToNCg0KKiBlbWlzc2lvbnMgaW50ZW5zaXR5IGRhdGEsIGZyb20gdGhlIEVQQSdzIHB1YmxpY2F0aW9ucy4gIFRoaXMgaXMgZWFzeSB0byBkb3dubG9hZCBidXQgbmVlZHMgdG8gYmUgZmlsdGVyZWQgYW5kIHJlZm9ybWVkIGJlZm9yZSBpdCdzIHVzZWQgaW4gdGhlIGFwcC4NCiogZ2xvYmFsIHdhcm1pbmcgcG90ZW50aWFsIGRhdGEuICBJIGRlZmluaXRlbHkgd2FudCB0byBnaXZlIHNvbWUgb3B0aW9ucyBoZXJlLg0KKiBzcGVuZGluZyBkYXRhLCBmcm9tIE9yZWdvbiBvciBhbnkgb3RoZXIgc291cmNlLCBidXQgaW4gY2F0ZWdvcmllcyBjb21wYXRpYmxlIHdpdGggdGhlIEVQQSdzIGVtaXNzaW9ucyBpbnRlbnNpdGllcw0KDQpTbyBpbiBnZW5lcmFsLCBpbXBhY3Q9c3BlbmRpbmcgaW4gZG9sbGFycyB4IGVtaXNzaW9ucyBpbnRlbnNpdHkgKHRvbnMgZW1pdHRlZC9kb2xsYXIpIHggZ2xvYmFsIHdhcm1pbmcgcG90ZW50aWFsICh1bml0bGVzcykuDQoNCkJ1dCB0byBtYWtlIHRoYXQgaGFwcGVuIGluIHRoZSBhcHAsDQoNCiogdGhlIGVtaXNzaW9ucyBpbnRlbnNpdHkgZGF0YSBuZWVkcyB0byBiZSBpbiBhIGZpbHRlcmVkIHRpZHkgZGF0YSBmcmFtZQ0KKiB0aGUgc3BlbmRpbmcgZGF0YSBoYXMgdG8gYmUgdXBsb2FkZWQgYW5kIGNoZWNrZWQgZm9yIGNvbXBhdGliaWxpdHkgKGluc2lkZSB0aGUgYXBwKQ0KKiBhIG51bWJlciBvZiBnbG9iYWwgd2FybWluZyBwb3RlbnRpYWwgcHJvZmlsZXMgaGF2ZSB0byBiZSBhdmFpbGFibGUNCg0KIyMjIFNldCB1cA0KDQpgYGB7cn0NCiMgbG9hZCBwYWNrYWdlcyBJIGxpa2UgdG8gdXNlDQpsaWJyYXJ5KGNoZWNrcG9pbnQpDQpsaWJyYXJ5KHRpZHl2ZXJzZSkNCmxpYnJhcnkocmVhZHhsKQ0KbGlicmFyeShrYWJsZUV4dHJhKQ0KDQojIHVzZSBwYWNrYWdlcyBhcyBvZiBhIGNlcnRhaW4gcmVmZXJlbmNlIGRhdGUNCmNoZWNrcG9pbnQoc25hcHNob3RfZGF0ZSA9ICIyMDIxLTA2LTE1IikNCg0KIyBzZWUgd2hhdCBteSB3b3JraW5nIGRpcmVjdG9yeSBpcw0KZ2V0d2QoKQ0KYGBgDQoNCiMjIyBFbWlzc2lvbnMgaW50ZW5zaXRpZXMNCg0KSSd2ZSBkb3dubG9hZGVkIHRoZSBFUEEncyBnaGcgZW1pc3Npb25zIGludGVuc2l0aWVzIGZyb20gdGhlIHdlYi4gIEkgbmVlZCB0byBjaG9vc2UgdGhlIHNoZWV0KHMpIG1vc3QgcmVsZXZhbnQgdG8gbWUsIGRvd25sb2FkIHRoZSBkYXRhLCBhbmQgdGlkeSBpdC4gIE1heWJlIGFsb25nIHRoZSB3YXkgSSdsbCBwcmludCBvdXQgc29tZSBvZiB0aGUgZG9jdW1lbnRhdGlvbiBzaGVldHMuDQoNCmBgYHtyfQ0KIyBzZXQgRVBBIGdoZyBmaWxlc3BlYw0KZXBhR0hHZGF0YUZpbGVTcGVjIDwtDQogICJzb3VyY2VfZGF0YS9TdXBwbHlDaGFpbkVtaXNzaW9uRmFjdG9yc2ZvclVTSW5kdXN0cmllc0NvbW1vZGl0aWVzLnhsc3giDQojIGZpbmQgb3V0IHdoYXQgc2hlZXRzIGFyZSB0aGVyZQ0KZXBhR0hHZGF0YUF2YWlsYWJsZVNoZWV0cyA8LQ0KICBleGNlbF9zaGVldHMocGF0aD1lcGFHSEdkYXRhRmlsZVNwZWMpDQprYWJsZSgNCiAgYXMuZGF0YS5mcmFtZShlcGFHSEdkYXRhQXZhaWxhYmxlU2hlZXRzKSwgDQogIGNhcHRpb249ImF2YWlsYWJsZSBzaGVldHMiDQopDQpgYGANClNpbmNlIG15IGdvYWwgaXMgdG8gZmluZCB0aGUgc3VwcGx5IGNoYWluIGVtaXNzaW9ucyBvZiBwdXJjaGFzZXMsIGl0IHNlZW1zIHJpZ2h0IHRvIHVzZSB0aGUgQ29tbW9kaXR5IGJhc2VkIHRhYmxlcy4gIFdoaWNoIG9mIHRoZSBtYW55IGNvbW1vZGl0eSBvcHRpb25zIHNob3VsZCBJIGNob29zZT8gIA0KDQpUaGUgeWVhciByZWNvcmRzIGFyZSBhIGJpdCBjb25mdXNpbmcsIGJ1dCBJIHRoaW5rIHRoZXkgcmVmZXIgdG8gdmVyc2lvbnMgb2YgdGhlIEkvTyB0YWJsZXMuICBBbGwgb2YgdGhlIGVtaXNzaW9ucyBpbnRlbnNpdGllcyBhcmUgaW4ga2cgcGVyIDIwMTggZG9sbGFycy4gIFRPIERPOiBGSU5EIE9VVCBXSEFUIFRIRSBESUZGRVJFTlQgWUVBUlMgUkVQUkVTRU5ULg0KDQpCdXQ6IGFzc3VtaW5nIEkgd2FudCB0aGUgbW9zdCByZWNlbnQsIHdoYXQgSSBzaG91bGQgaW1wb3J0IGlzOg0KDQoqIDIwMTZfU3VtbWFyeV9Db21tb2RpdHkNCiogMjAxNl9EZXRhaWxfQ29tbW9kaXR5DQoNCmBgYHtyfQ0KIyBpbXBvcnQgbXkgc2hlZXRzIG9mIGludGVyZXN0DQplcGFHSEdkYXRhU2V0MXJhdyA8LQ0KICByZWFkX2V4Y2VsKA0KICAgIHBhdGg9ZXBhR0hHZGF0YUZpbGVTcGVjLA0KICAgIHNoZWV0PSIyMDE2X1N1bW1hcnlfQ29tbW9kaXR5Ig0KICApDQplcGFHSEdkYXRhU2V0MnJhdyA8LQ0KICByZWFkX2V4Y2VsKA0KICAgIHBhdGg9ZXBhR0hHZGF0YUZpbGVTcGVjLA0KICAgIHNoZWV0PSIyMDE2X0RldGFpbF9Db21tb2RpdHkiDQogICkNCmBgYA0KDQpMb29rcyBsaWtlIHRoZXJlIGlzIGEgZGF0YSBkaWN0aW9uYXJ5IEkgbWlnaHQgd2FudCB0byBwcmludCBvdXQgZm9yIHRoZSByZWNvcmQuICBUaGVzZSBhcmUgdGhlIGZpZWxkIG5hbWVzIGluIHRoZSBFeGNlbCB0YWJsZXMuDQoNCmBgYHtyfQ0KZXBhR0hHZGF0YURpY3Rpb25hcnkgPC0NCiAgcmVhZF9leGNlbChwYXRoPWVwYUdIR2RhdGFGaWxlU3BlYywgc2hlZXQ9IkRhdGEgRGljdGlvbmFyeSIpDQprYWJsZShlcGFHSEdkYXRhRGljdGlvbmFyeSkgJT4lIA0KICBrYWJsZV9zdHlsaW5nKGJvb3RzdHJhcF9vcHRpb25zID0gImJvcmRlcmVkIikNCmBgYA0KDQpJJ20gbm90IGdvaW5nIHRvIG5lZWQgYWxsIHRob3NlIGZpZWxkcy4gIExldCdzIHNlbGVjdCBhbmQgcmVuYW1lIGZpZWxkcy4NCg0KYGBge3J9DQojIHNlbGVjdCBkZXNpcmVkIGZpZWxkcyBhbmQgcmVuYW1lIHRoZW0gZm9yIGJyZXZpdHkNCmVwYUdIR2RhdGFTZXQxIDwtDQogIGVwYUdIR2RhdGFTZXQxcmF3ICU+JQ0KICBzZWxlY3QoDQogICAgYENvbW1vZGl0eSBDb2RlYCwNCiAgICBgQ29tbW9kaXR5IE5hbWVgLA0KICAgIGBTdWJzdGFuY2VgLA0KICAgIGBVbml0YCwNCiAgICBgU3VwcGx5IENoYWluIEVtaXNzaW9uIEZhY3RvcnMgd2l0aG91dCBNYXJnaW5zYA0KICApICU+JQ0KICByZW5hbWUoDQogICAgYmVhQ29kZT1gQ29tbW9kaXR5IENvZGVgLA0KICAgIGJlYU5hbWU9YENvbW1vZGl0eSBOYW1lYCwNCiAgICBzdWJzdGFuY2U9U3Vic3RhbmNlLA0KICAgIHVuaXQ9VW5pdCwNCiAgICBpbXBGYWN0b3I9YFN1cHBseSBDaGFpbiBFbWlzc2lvbiBGYWN0b3JzIHdpdGhvdXQgTWFyZ2luc2ANCiAgKQ0KZXBhR0hHZGF0YVNldDIgPC0NCiAgZXBhR0hHZGF0YVNldDJyYXcgJT4lDQogIHNlbGVjdCgNCiAgICBgQ29tbW9kaXR5IENvZGVgLA0KICAgIGBDb21tb2RpdHkgTmFtZWAsDQogICAgYFN1YnN0YW5jZWAsDQogICAgYFVuaXRgLA0KICAgIGBTdXBwbHkgQ2hhaW4gRW1pc3Npb24gRmFjdG9ycyB3aXRob3V0IE1hcmdpbnNgDQogICkgJT4lIA0KICByZW5hbWUoDQogICAgYmVhQ29kZT1gQ29tbW9kaXR5IENvZGVgLA0KICAgIGJlYU5hbWU9YENvbW1vZGl0eSBOYW1lYCwNCiAgICBzdWJzdGFuY2U9U3Vic3RhbmNlLA0KICAgIHVuaXQ9VW5pdCwNCiAgICBpbXBGYWN0b3I9YFN1cHBseSBDaGFpbiBFbWlzc2lvbiBGYWN0b3JzIHdpdGhvdXQgTWFyZ2luc2ANCiAgKQ0KYGBgDQoNCk5vdyBJIGtub3cgSSB3b3VsZCBsaWtlIHRvIGNvbWJpbmUgdGhlc2UgdHdvIHRhYmxlcyAtLSBzbyB0aGF0IHVzZXJzIGNhbiBlbnRlciBleHBlbmRpdHVyZXMgaW4gZWl0aGVyIGRldGFpbCBvciBzdW1tYXJ5IGxldmVscyBvZiBkZXRhaWwgKGFuZCBtaXggYW5kIG1hdGNoKS4gIFRoYXQgd2lsbCBiZSBtb3N0IGNvbnZlbmllbnQgaWYgdGhlIGJlYUNvZGVzIGFuZCBiZWFOYW1lcyBkbyBub3Qgb3ZlcmxhcCBiZXR3ZWVuIHRoZSB0d28gdGFibGVzLiAgTGV0J3MgY2hlY2suDQoNCmBgYHtyfQ0KZXBhR0hHYmVhQ29kZXMxIDwtDQogIGVwYUdIR2RhdGFTZXQxICU+JSBzZWxlY3QoYmVhQ29kZSkgJT4lIGRpc3RpbmN0KCkgDQplcGFHSEdiZWFDb2RlczIgPC0NCiAgZXBhR0hHZGF0YVNldDIgJT4lIHNlbGVjdChiZWFDb2RlKSAlPiUgZGlzdGluY3QoKQ0KaW5uZXJfam9pbigNCiAgZXBhR0hHYmVhQ29kZXMyICwNCiAgZXBhR0hHYmVhQ29kZXMxICwNCiAgYnk9ImJlYUNvZGUiDQopICU+JSBwcmludCgpDQpgYGANCg0Kd2hldywgaXQgbG9va3MgbGlrZSBub25lIG92ZXJsYXAuICBMZXQncyB0cnkgdGhlIGNvbW1vZGl0eSBuYW1lcy4NCg0KYGBge3J9DQplcGFHSEdiZWFOYW1lczEgPC0NCiAgZXBhR0hHZGF0YVNldDEgJT4lIHNlbGVjdChiZWFOYW1lKSAlPiUgZGlzdGluY3QoKSANCmVwYUdIR2JlYU5hbWVzMiA8LQ0KICBlcGFHSEdkYXRhU2V0MiAlPiUgc2VsZWN0KGJlYU5hbWUpICU+JSBkaXN0aW5jdCgpDQppbm5lcl9qb2luKA0KICBlcGFHSEdiZWFOYW1lczIgJT4lIG11dGF0ZShsZXZlbD0iZGV0YWlsIiksDQogIGVwYUdIR2JlYU5hbWVzMSAlPiUgbXV0YXRlKGxldmVsPSJzdW1tYXJ5IiksDQogIGJ5PSJiZWFOYW1lIg0KKSAlPiUgcHJpbnQoKQ0KYGBgDQoNCg0KTG9va3MgbGlrZSB0aGVyZSBpcyBhIGxpdHRsZSBvdmVybGFwIGluIHRoZSBuYW1lcy4gIEJ1dCBub3QgaW4gdGhlIGNvZGVzLiAgU28gaWYgSSB1c2UgY29kZXMgYXMgdGhlIGtleSB2YXJpYWJsZSB0aGVuIGl0IHdvbid0IG1hdHRlci4gIA0KIEkgY291bGQgYWxzbyB2aXN1YWxseSBpbmRpY2F0ZSB0aGUgc3VtbWFyeSBsZXZlbCB0ZXh0dWFsbHkgLS0gYWxsIGNhcHMgbWF5YmU/DQogDQpMZXQncyB0cnkgY29tYmluaW5nIHRoZSBuYW1lcyBhbmQgcHJpbnRpbmcgdGhlbSBvdXQgYXMgYSB0YWJsZS4NCg0KYGBge3J9DQojIG1ha2UgYSBjb21iaW5lZCBlcGEgY29tbW9kaXR5IHRhYmxlDQplcGFBbGxDb21tb2RpdHlUYWJsZSA8LQ0KICBiaW5kX3Jvd3MoDQogICAgZXBhR0hHZGF0YVNldDEgJT4lDQogICAgICBzZWxlY3QoYmVhQ29kZSwgYmVhTmFtZSkgJT4lDQogICAgICBtdXRhdGUoDQogICAgICAgIGR0bEx2bD0ic3VtbWFyeSIsDQogICAgICAgIGJlYU5hbWU9c3RyX3RvX3VwcGVyKGJlYU5hbWUpDQogICAgICApICU+JQ0KICAgICAgZGlzdGluY3QoKSwNCiAgICBlcGFHSEdkYXRhU2V0MiAlPiUNCiAgICAgIHNlbGVjdChiZWFDb2RlLCBiZWFOYW1lKSAlPiUNCiAgICAgIG11dGF0ZShkdGxMdmw9ImRldGFpbCIpICU+JQ0KICAgICAgZGlzdGluY3QoKQ0KICApICU+JQ0KICBhcnJhbmdlKGJlYUNvZGUsIGJlYU5hbWUpDQprYWJsZShlcGFBbGxDb21tb2RpdHlUYWJsZSkgJT4lDQogIGthYmxlX3N0eWxpbmcoYm9vdHN0cmFwX29wdGlvbnMgPSAicmVzcG9uc2l2ZSIpDQpgYGANCldlbGwsIHdoYXQgdGhpcyB0ZWxscyBtZSBpcyB0aGF0IEkgY2FuIGRlZmluaXRlbHkgYWRkIHRoZSB0d28gdGFibGVzIHRvZ2V0aGVyLiAgQnV0IEkgbmVlZCB0byBwcmVzZXJ2ZSB0aGUgYmVhQ29kZSBhbmQgKHByb2JhYmx5IGZvciBjbGFyaXR5KSBhbHNvIHByZXNlcnZlIHRoZSBkdGxMdmwgYW5kIGFsc28gbWFyayBvZmYgdGhlIHN1bW1hcnkgbGV2ZWwgc29tZWhvdyAoYXMgd2l0aCBhbGwgY2FwcykuDQoNCkFsbCByaWdodCBsZXQncyBtYWtlIGl0Lg0KDQpgYGB7cn0NCiMgbWFrZSB0aGUgY29tYmluZWQgaW1wYWN0IGludGVuc2l0aWVzIHRhYmxlDQplcGFHSEdpbXBhY3RJbnRlbnNpdGllcyA8LQ0KICBiaW5kX3Jvd3MoDQogICAgZXBhR0hHZGF0YVNldDEgJT4lDQogICAgICBtdXRhdGUoDQogICAgICAgIGR0bEx2bD0ic3VtbWFyeSIsDQogICAgICAgIGJlYU5hbWU9c3RyX3RvX3VwcGVyKGJlYU5hbWUpDQogICAgICApLA0KICAgIGVwYUdIR2RhdGFTZXQyICU+JQ0KICAgICAgbXV0YXRlKA0KICAgICAgICBkdGxMdmw9ImRldGFpbCINCiAgICAgICkNCiAgKSAlPiUNCiAgYXJyYW5nZShiZWFDb2RlLCBiZWFOYW1lLCBzdWJzdGFuY2UpDQpgYGANCg0KU28gb2JqZWN0IGVwYUdIR2ltcGFjdEludGVuc2l0aWVzIGlzIHdoYXQgSSdsbCB1c2UuDQoNCmBgYHtyfQ0KIyBjbGVhbiB1cCB3b3Jrc3BhY2UgYnkgZGVsZXRpbmcgbW9zdCBvYmplY3RzDQpybSgNCiAgbGlzdD0NCiAgICBzZXRkaWZmKA0KICAgICAgbHMoKSwNCiAgICAgIGMoImVwYUdIR2ltcGFjdEludGVuc2l0aWVzIiwgImVwYUdIR2RhdGFEaWN0aW9uYXJ5IikNCiAgKQ0KKQ0KYGBgDQoNCiMjIyBpbXBvcnRpbmcgdGhlIHNwZW5kaW5nIGRhdGEuDQoNCkluIHRoZSBhcHAgSSBuZWVkIHRvIGltcG9ydCBhIHVzZXIncyBmaWxlIGFuZCB0aGVuIGNoZWNrIHRoYXQgdGhlaXIgZGF0YSBtZWV0cyB0aGUgYWNjZXB0YWJsZSBjYXRlZ29yaWVzLg0KDQpTbyBsZXQncyBkZXZlbG9wIHRoZSBhY2NlcHRhYmxlIGxpc3QgZmlyc3QuDQoNCmBgYHtyfQ0KIyBtYWtlIGFjY2VwdGFibGUgc3BlbmRpbmcgY2F0ZWdvcnkgZGF0YSBmcmFtZSAmIHNhdmUgaXQgYXMgZGlzayBmaWxlDQpva1NwZW5kaW5nQ2F0cyA8LQ0KICBlcGFHSEdpbXBhY3RJbnRlbnNpdGllcyAlPiUNCiAgc2VsZWN0KGJlYUNvZGUsIGJlYU5hbWUsIGR0bEx2bCkgJT4lDQogIGRpc3RpbmN0KCkgJT4lDQogIGFycmFuZ2UoYmVhQ29kZSwgYmVhTmFtZSkNCnNhdmVSRFMob2tTcGVuZGluZ0NhdHMsICJpbnRlcm1lZGlhdGVfZGF0YS9va1NwZW5kaW5nQ2F0cy5SRGF0YSIpDQpgYGANCg0KTm93LCBpbiBhIHNvbWV3aGF0IG5vbi1yZXByb2R1Y2libGUgc3RlcCwgSSdtIGdvaW5nIHRvIGNyZWF0ZSBhbiBFeGNlbCB0ZW1wbGF0ZSB0byBhbGxvdyBwZW9wbGUgdG8gZW50ZXIgc3BlbmRpbmcgZGF0YSBpbiBhbiBhY2NlcHRhYmxlIGZvcm1hdC4gIEl0IGlzIGF2YWlsYWJsZSBpbiB0aGUgInNvdXJjZV9kYXRhIiBmb2xkZXIgYXMgInVzZXJzX3NwZW5kaW5nX2RhdGFfYmxhbmsueGxzeCIuICBUaGlzIG1heSBiZSBjb3BpZWQgYW5kIGFsdGVyZWQgYnkgdXNlcnMgYW5kIHVwbG9hZGVkIHRvIHRoZSBhcHAuDQoNCk5vdyBJJ3ZlIGdvdCB0byB0YWtlIHNvbWUgc3BlbmRpbmcgZGF0YSBhbmQgc2VlIGhvdyBpdCBtYXRjaGVzIHVwLiAgTW9yZSBnZW5lcmFsbHksIEkndmUgZ290IHRvIGZpZ3VyZSBvdXQgaG93IHRvICJ2YWxpZGF0ZSIgdGhlIGluY29taW5nIGRhdGEuLi4gDQoNCiogaXMgaXQgaW4gdGhlIHJpZ2h0IGZvcm1hdD8gKGUuZy4gY29kZXMgYXMgdGV4dCwgc3BlbmRpbmcgYXMgaW50ZWdlcikNCiogZG8gYWxsIHRoZSBjb2RlcyBoYXZlIGVudHJpZXMgaW4gdGhlIG9rU3BlbmRpbmdDYXRzPw0KDQpMZXQncyB0cnkgaXQgd2l0aCB0d28gZGlmZmVyZW50IGRhdGEgZmlsZXMuDQoNCiogUml2aW4ncyBPcmVnb24gc3BlbmRpbmcgZGF0YSBmaWxlIHByb2R1Y2VkIGluIDIwMjAgKGZyb20gYW4gb2Jzb2xldGUgdmVyc2lvbiBvZiB0aGlzIGFuYWx5c2lzKQ0KKiBBIGZpY3Rpb25hbCBzcGVuZGluZyBkYXRhIGZpbGUgdXNpbmcgdGhlIHRlbXBsYXRlIHByb2R1Y2VkIGFib3ZlLg0KDQpgYGB7cn0NCiMgZ2V0IFJpdmluJ3MgZHJhZnQgc3BlbmRpbmcgZmlsZSwgY2lyY2EgMjAyMA0KZXhhbXBsZVNwZW5kaW5nRGF0YTEgPC0NCiAgcmVhZF9leGNlbCgNCiAgICBwYXRoPSIuLi9xdWljay1wdXJjaGFzaW5nLWltcGFjdHMvc291cmNlX2RhdGEvb3JlZ29uX3NwZW5kaW5nXzIwMjBfMDRfMjMueGxzeCIsDQogICAgc2hlZXQ9Im1hcnRpbjUiLA0KICAgIHNraXA9NCwNCiAgICBjb2xfbmFtZXMgPSBUUlVFLA0KICAgIGNvbF90eXBlcyA9IGMoInRleHQiLCAidGV4dCIsICJ0ZXh0IiwgIm51bWVyaWMiKQ0KICApICU+JQ0KICByZW5hbWUoDQogICAgdXNlckNhdGVnb3J5PWBERVEgQ2F0ZWdvcnlgLA0KICAgIGJlYUNvZGU9YEJBRSAgQ29kZWAsDQogICAgdXNlclNwZW5kaW5nPWBCRUEgY29zdGANCiAgKSAlPiUNCiAgc2VsZWN0KGJlYUNvZGUsIHVzZXJTcGVuZGluZywgdXNlckNhdGVnb3J5KSAlPiUNCiAgZmlsdGVyKHVzZXJTcGVuZGluZyA+IDApICU+JQ0KICBtdXRhdGUoDQogICAgIyBhIG1hbnVhbCBlZGl0IGJhc2VkIG9uIGEgdHlwbyBkaXNjb3ZlcmVkIGJlbG93DQogICAgYmVhQ29kZT1pZmVsc2UoYmVhQ29kZT09IkdTTEdIIiwgIjU0MTJPUCIsIGJlYUNvZGUpDQogICkgJT4lDQogIGFycmFuZ2UoYmVhQ29kZSwgZGVzYyh1c2VyU3BlbmRpbmcpKQ0KDQojIHByaW50IG91dCByb3dzIG9mIHNwZW5kaW5nIGRhdGENCnByaW50KG5yb3coZXhhbXBsZVNwZW5kaW5nRGF0YTEpKQ0KDQojIGNvdW50IGhvdyBtYW55IHJvd3Mgam9pbiBiYXNlZCBvbiBiZWFDb2RlDQpzZW1pX2pvaW4oDQogIGV4YW1wbGVTcGVuZGluZ0RhdGExLA0KICBva1NwZW5kaW5nQ2F0cywNCiAgYnk9ImJlYUNvZGUiDQopICU+JSBucm93KCkgJT4lIHByaW50KCkNCg0KIyBwcmludCBvdXQgcm93cyB0aGF0IGRvbid0IG1hdGNoDQphbnRpX2pvaW4oDQogIGV4YW1wbGVTcGVuZGluZ0RhdGExLA0KICBva1NwZW5kaW5nQ2F0cywNCiAgYnk9ImJlYUNvZGUiDQopICU+JSANCmthYmxlKCkgJT4lIGthYmxlX3N0eWxpbmcoYm9vdHN0cmFwX29wdGlvbnMgPSAicmVzcG9uc2l2ZSIpDQpgYGANCg0KR29vZCBuZXdzIC0tIG5lYXJseSBldmVyeXRoaW5nIG1hdGNoZWQgdXAuICBUaGUgZXhhbWluYXRpb24gYWJvdmUgdW5jb3ZlcmVkIGp1c3Qgb25lIG1pc21hdGNoLCB3aGljaCBJIGZvdW5kIGEgcmVhc29uYWJsZSBzdWJzdGl0dXRlIGZvci4NCg0KT2ssIGxldCdzIHRyeSB0aGUgdGVtcGxhdGUgSSBjcmVhdGVkLg0KDQpgYGB7cn0NCiMgaW1wb3J0IHNwcmVhZHNoZWV0IHdpdGggc3BlbmRpbmcgZGF0YQ0KZXhhbXBsZVNwZW5kaW5nRGF0YTIgPC0NCiAgcmVhZF9leGNlbCgNCiAgICBwYXRoPSJzb3VyY2VfZGF0YS91c2Vyc19zcGVuZGluZ19kYXRhX3NhbXBsZS54bHN4IiwNCiAgICBza2lwPTExLA0KICAgIGNvbF9uYW1lcyA9IFRSVUUNCiAgKSAlPiUNCiAgc2VsZWN0KGJlYUNvZGUsIHVzZXJTcGVuZGluZywgdXNlckNhdGVnb3J5KSAlPiUNCiAgZmlsdGVyKHVzZXJTcGVuZGluZyA+IDApICU+JQ0KICBtdXRhdGUoDQogICAgIyB1c2UgdGhpcyBzcGFjZSBmb3IgbWFudWFsIGVkaXRzDQogICkgJT4lDQogIGFycmFuZ2UoYmVhQ29kZSwgZGVzYyh1c2VyU3BlbmRpbmcpKQ0KDQojIHByaW50IG91dCByb3dzIG9mIHNwZW5kaW5nIGRhdGENCnByaW50KG5yb3coZXhhbXBsZVNwZW5kaW5nRGF0YTIpKQ0KDQojIGNvdW50IGhvdyBtYW55IHJvd3Mgam9pbiBiYXNlZCBvbiBiZWFDb2RlDQpzZW1pX2pvaW4oDQogIGV4YW1wbGVTcGVuZGluZ0RhdGEyLA0KICBva1NwZW5kaW5nQ2F0cywNCiAgYnk9ImJlYUNvZGUiDQopICU+JSBucm93KCkgJT4lIHByaW50KCkNCg0KIyBwcmludCBvdXQgcm93cyB0aGF0IGRvbid0IG1hdGNoDQphbnRpX2pvaW4oDQogIGV4YW1wbGVTcGVuZGluZ0RhdGExLA0KICBva1NwZW5kaW5nQ2F0cywNCiAgYnk9ImJlYUNvZGUiDQopICU+JSANCmthYmxlKCkgJT4lIGthYmxlX3N0eWxpbmcoYm9vdHN0cmFwX29wdGlvbnMgPSAicmVzcG9uc2l2ZSIpDQpgYGANCkxvb2tzIGxpa2UgdGhhdCdzIHRoZSB3YXkgdG8gZG8gaXQuDQoNCiogbG9hZCBpbiB0aGUgdGFibGUNCiogcmVkdWNlIHRvIHRob3NlIDMgc3RhbmRhcmQgZmllbGRzDQoqIGNoZWNrIGZvciBzZW1pX2pvaW5zIGFuZCBhbnRpX2pvaW5zDQoqIHByaW50IG91dCBhbnkgYW50aV9qb2lucw0KDQpBdCB0aGlzIG1vbWVudCBJJ20gZ29pbmcgdG8gY3JlYXRlIHRoZSBmaWxlIGZvciB0aGUgc2hpbnkgYXBwIHRvIHNlZSBpZiBJIGNhbiB1cGxvYWQgZGF0YSBpbiB0aGUgZm9ybSBvZiB0aGUgdGVtcGxhdGUuDQoNCi4uLg0KDQpMb29rcyBsaWtlIEkgZ290IHRoYXQgd29ya2luZy4gIEknbSBnb2luZyB0byBoYXZlIHRvIGFkZCBhIGxvdCBvZiBmZWF0dXJlcyBsYXRlciwgbGlrZQ0KDQoqIGFkZGl0aW9uYWwgdmFsaWRhdGlvbg0KKiBhbiBleGFtcGxlIGZpbGUgdG8gZG93bmxvYWQNCiogY2hvaWNlIG9mIHVzaW5nIHByZXNldCBkYXRhIGZyb20gT1JlZ29uDQoNCmJ1dCB0aGF0IGNhbiBnbyBsYXRlci4NCg0KDQojIyMgZ2xvYmFsIHdhcm1pbmcgcG90ZW50aWFscw0KDQpUaGUgRVBBIGRhdGEgZ2l2ZXMgbWFzc2VzIHBlciBleHBlbmRlZCAkIGZvciAzIHBhcnRpY3VsYXIgZ2Fzc2VzLCBhbmQgQ08yIGVxdWl2YWxlbnRzIGZvciBvbmUgdW1icmVsbGEgY2F0ZWdvcnkgIm90aGVyIGdhc3NlcyIuICBUaGlzIGdpdmVzIHRoZSBvcHRpb24gb2YgY2hvb3NpbmcgeW91ciBvd24gR2xvYmFsIFdhcm1pbmcgcG90ZW50aWFscyAoZS5nLiBJUENDIEFSNCAyMCB5ZWFyLCBldGMuKSwgYnV0IGRlYWxpbmcgd2l0aCB0aG9zZSBvdGhlciBnYXNlcyB3aWxsIGJlIGEgcGFpbi4NCg0KKiBDTzIgbWFzc2VzIHdpbGwgYWx3YXlzIGhhdmUgYSBHV1Agb2YgMSAoZnJvbSBkZWZpbnRpb24gb2YgR1dQKS4NCiogQ0g0IG1hc3NlcyB3aWxsIGhhdmUgYSB2YXJ5aW5nIEdXUCBJIGNhbiBnZXQgZnJvbSB0YWJsZXMgb2YgR1dQJ3MuDQoqIE4yTyBtYXNzZXMgd2lsbCBoYXZlIGEgdmFyeWluZyBHV1AgSSBjYW4gZ2V0IGZyb20gdGFibGVzIG9mIEdXUCdzLg0KKiB0aGUgb3RoZXIgZ2FzZXMgYXJlIGFscmVhZHkgcmVwb3J0ZWQgd2l0aCBhbiBpbmhlcmVudCBHV1AgKGZyb20gQVI0IDEwMCB5ZWFyKS4gIElmIEkgd2FudCB0byBjb3JyZWN0IHRoaXMgSSBuZWVkIHRvIGZpZ3VyZSBvdXQgdGhlIHJlbGF0aW9uc2hpcCBvZiAib3RoZXIgZ2FzIiBHV1AncyB1bmRlciBBUjQgMTAwIHRvIHRoZWlyIEdXUCdzIHVuZGVyIG90aGVyIHZpZXdzLg0KDQpMZXQncyByZWFkIGluIHNvbWUgR1dQJ3MgYW5kIGRvIHNvbWUgZmlsdGVyaW5nLg0KDQpgYGB7cn0NCiMgZmlsZXNwZWMgb2Ygc3ByZWFkc2hlZXQgd2l0aCBHV1AncyBmcm9tIEdhQmkNCkdXUGZpbGVzcGVjIDwtICJzb3VyY2VfZGF0YS9nd3BfZmFjdG9yc19mcm9tX2dhYmkueGxzeCINCg0KIyBnZXQgbGlzdCBvZiBzaGVldHMgaW4gc291cmNlIGZpbGUNCmxpc3RPZkdXUHNoZWV0cyA8LSANCiAgZXhjZWxfc2hlZXRzKHBhdGg9R1dQZmlsZXNwZWMpDQoNCiMgcmVhZCBlYWNoIHNoZWV0IGFuZCBsYWJlbCB0aGUgZXN0aW1hdGVzIGZyb20gc2hlZXQgbmFtZQ0KZm9yIChpIGluIDE6bGVuZ3RoKGxpc3RPZkdXUHNoZWV0cykpIHsNCiAgdGVtcERGIDwtIA0KICAgIHJlYWRfZXhjZWwoDQogICAgICBwYXRoPUdXUGZpbGVzcGVjLA0KICAgICAgc2hlZXQ9bGlzdE9mR1dQc2hlZXRzW2ldLA0KICAgICAgc2tpcD0yMiwNCiAgICAgIGNvbF9uYW1lcz1jKCJjb21wb3VuZCIsICJqdW5rMSIsICJqdW5rMiIsICJnd3AiLCAianVuazMiKSwNCiAgICAgIGNvbF90eXBlcz1jKCJ0ZXh0IiwgIm51bWVyaWMiLCAidGV4dCIsICJudW1lcmljIiwgIm51bWVyaWMiKQ0KICAgICkgJT4lDQogICAgc2VsZWN0KGNvbXBvdW5kLCBnd3ApICU+JQ0KICAgIGZpbHRlcihnd3A+MCkgJT4lDQogICAgbXV0YXRlKA0KICAgICAgZ3dwVmVyc2lvbj1saXN0T2ZHV1BzaGVldHNbaV0sDQogICAgICBzdWJzdGFuY2U9DQogICAgICAgIGNhc2Vfd2hlbigNCiAgICAgICAgICBjb21wb3VuZD09IkNhcmJvbiBkaW94aWRlIFtJbm9yZ2FuaWMgZW1pc3Npb25zIHRvIGFpcl0iIH4NCiAgICAgICAgICAgICJjYXJib24gZGlveGlkZSIsDQogICAgICAgICAgY29tcG91bmQ9PSJNZXRoYW5lIChiaW90aWMpIFtPcmdhbmljIGVtaXNzaW9ucyB0byBhaXIgKGdyb3VwIFZPQyldIiB+ICJtZXRoYW5lIiwNCiAgICAgICAgICBjb21wb3VuZD09Ik5pdHJvdXMgb3hpZGUgKGxhdWdoaW5nIGdhcykgW0lub3JnYW5pYyBlbWlzc2lvbnMgdG8gYWlyXSIgfiAibml0cm91cyBveGlkZSIsDQogICAgICAgICAgVFJVRSB+ICJvdGhlciBHSEdzIg0KICAgICAgICApDQogICAgKQ0KICANCiAgaWYgKGk9PTEpIHsNCiAgICBnd3BDb2xsZWN0aW9uIDwtIHRlbXBERlswLF0NCiAgfQ0KICANCiAgZ3dwQ29sbGVjdGlvbiA8LSANCiAgICBiaW5kX3Jvd3MoZ3dwQ29sbGVjdGlvbiwgdGVtcERGKSANCn0NCg0KIyBub3cgbGV0cyBzdW1tYXJpemUgdGhhdCBHV1AgY29sbGVjdGlvbiBieSBnYXMgZ3JvdXAuDQpHV1B0b1VzZUFsbW9zdCA8LQ0KICBnd3BDb2xsZWN0aW9uICU+JQ0KICBtdXRhdGUobG9nMTBnd3A9bG9nMTAoZ3dwKSkgJT4lDQogIGdyb3VwX2J5KGd3cFZlcnNpb24sIHN1YnN0YW5jZSkgJT4lDQogIHN1bW1hcmlzZShsb2cxMGd3cD1tZWFuKGxvZzEwZ3dwKSkgJT4lDQogIHVuZ3JvdXAoKSAlPiUNCiAgbXV0YXRlKGd3cD0xMCoqbG9nMTBnd3ApICU+JQ0KICBzZWxlY3QoLWxvZzEwZ3dwKQ0KIyBmb3IgdGhlICJvdGhlciBHSEdzIiBJIGNhbid0IHVzZSB0aG9zZSB2YWx1ZXMgYXMgY2FsY3VsYXRlZC4NCiMgSSBoYXZlIHRvIHVzZSBhIHN0YW5kYXJkLi4uIGZvciBub3cgbGV0J3Mgc2F5IEFSNSAxMDAuDQojIHdoZW4gSSBnZXQgdGhlIGRhdGEgSSBzaG91bGQgdXBkYXRlIHRoYXQgdG8gQVI0IDEwMC4NCnN0YW5kYXJkVmFsdWVGb3JPdGhlckdhc2VzIDwtDQogIEdXUHRvVXNlQWxtb3N0ICU+JSANCiAgZmlsdGVyKGd3cFZlcnNpb249PSJJUENDIEFSNCAxMDAiLCBzdWJzdGFuY2U9PSJvdGhlciBHSEdzIikgJT4lDQogIHB1bGwoZ3dwKQ0KDQpHV1B0b1VzZSA8LQ0KICBHV1B0b1VzZUFsbW9zdCAlPiUNCiAgbXV0YXRlKA0KICAgIGd3cD1pZmVsc2UoDQogICAgICBzdWJzdGFuY2U9PSJvdGhlciBHSEdzIiwgZ3dwL3N0YW5kYXJkVmFsdWVGb3JPdGhlckdhc2VzLCBnd3ANCiAgICApDQogICkNCg0Ka2FibGUoR1dQdG9Vc2UpDQpgYGANClNvIGxvb2tpbmcgYXQgdGhhdCB0YWJsZSwgYWxsIHRoZSBmaWd1cmVzIGZvciBtYWpvciBnYXNzZXMgYXJlIGNvcnJlY3QuICBGb3IgdGhlICJvdGhlciBnYXNlcyIgaXRzIHN1cHBvc2VkIHRvIGJlIGEgcmF0aW8gdnMuIHRoZSB2YWx1ZSBmb3IgQVI0IDEwMC4gIFRoZSBBUjQgMjAgdmFsdWUgbWFrZXMgc2Vuc2UuICBOb3Qgc3VyZSBhYm91dCB0aGUgQVI1IHZhbHVlcyAtLSBiZWNhdXNlIHVuZm9ydHVuYXRlbHkgdGhleSBkaWQgbm90IGNvbWUgZnJvbSBjb21wbGV0ZWx5IGNvbXBhdGlibGUgZGF0YSBzZXRzLiAgSSB3aWxsIGhhdmUgdG8gc2VlIGhvdyBtdWNoIHRoZSBvdGhlciBnYXNlcyBjb250cmlidXRlIHRvIHRoZSByZXN1bHRzLiAgDQoNCklmIHRoZXkgY29udHJpYnV0ZSBhIGxvdCwgSSBtYXkgbmVlZCB0byBnbyBiYWNrIGludG8gdGhhdCB0YWJsZSBhbmQgdHJ5IHRvIG1ha2UgdGhlIEFSNSBzZWxlY3Rpb25zIG1vcmUgY29tcGF0aWJsZSB3aXRoIEFSNC4gIExvb2tzIGxpa2UgdGhlcmUgYXJlIG1vcmUgZ2FzZXMgaW4gdGhlIEFSNSwgc28gSSB3b3VsZCB0cnkgdG8gdXNlIHRoZSBBUjQgc3Vic2V0LCBtYXliZSB3aXRoIGEgZmxhZyBmaWVsZD8NCg0KTGV0J3Mgc2F2ZSB0aGF0IHRhYmxlIHRvIHRoZSBpbnRlcm1lZGlhdGUgem9uZSBzbyBpdCBjYW4gYmUgdXNlZCBpbiB0aGUgYXBwLg0KDQpgYGB7cn0NCnNhdmVSRFMoR1dQdG9Vc2UsIGZpbGU9ImludGVybWVkaWF0ZV9kYXRhL0dXUHRvVXNlLlJEYXRhIikNCmBgYA0KDQojIyMgUHV0dGluZyBpdCB0b2dldGhlciBpbiBhIHNhbXBsZSBjYWxjdWxhdGlvbg0KDQpzbyBub3cgSSd2ZSBnb3Qgc29tZSBleGFtcGxlIHNwZW5kaW5nLCBlLmcuDQoNCmBgYHtyfQ0Ka2FibGUoaGVhZChleGFtcGxlU3BlbmRpbmdEYXRhMikpDQpgYGANCg0KYW5kIHNvbWUgZW1pc3Npb25zIGludGVuc2l0eSBkYXRhLCBlLmcuDQoNCmBgYHtyfQ0Ka2FibGUoaGVhZChlcGFHSEdpbXBhY3RJbnRlbnNpdGllcykpDQpgYGANCg0KYW5kIHNvbWUgR1dQIGRhdGEsIGVnLg0KDQpgYGB7cn0NCmthYmxlKGhlYWQoR1dQdG9Vc2UpKQ0KYGBgDQoNCmFuZCBhbGwgSSBuZWVkIHRvIGRvIGlzIHB1dCB0aGVtIHRvZ2V0aGVyIGluIGEgd2F5IHRoYXQgY2FuIGJlIGZpbHRlcmVkLg0KDQpzbywgaW1wYWN0PXNwZW5kaW5nIHggaW50ZW5zaXR5IHggZ3dwLg0Kbm93IHRoYXQgSSB0aGluayBhYm91dCBpdCwgdGhlIGludGVuc2l0eSBhbmQgZ3dwIHRhYmxlcyB3aWxsIG5ldmVyIGNoYW5nZSwgc28gSSBjYW4ganVzdCBtZXJnZSB0aGVtLg0KDQpgYGB7cn0NCiMgY29tYmluZSB0aGUgaW50ZW50c2l0eSBhbmQgR1dQIHRhYmxlcw0KaW1wYWN0SW50ZW5zaXRpZXNXaXRoR1dQdmVyc2lvbnMgPC0NCiAgZnVsbF9qb2luKA0KICAgIGVwYUdIR2ltcGFjdEludGVuc2l0aWVzICU+JQ0KICAgICAgbXV0YXRlKA0KICAgICAgICBpbXBhY3RDYXRlZ29yeT0iR0hHIGVtaXNzaW9ucyIsDQogICAgICAgIGltcGFjdFVuaXRzPSJrZyBDTzJlIg0KICAgICksDQogICAgR1dQdG9Vc2UsDQogICAgYnk9InN1YnN0YW5jZSINCiAgKQ0KIyBzYXZlIHRoZSByZXN1bHQgYXMgYSBkaXNrIGZpbGUNCnNhdmVSRFMoDQogIGltcGFjdEludGVuc2l0aWVzV2l0aEdXUHZlcnNpb25zLA0KICAiaW50ZXJtZWRpYXRlX2RhdGEvaW1wYWN0SW50ZW5zaXRpZXNXaXRoR1dQdmVyc2lvbnMuUkRhdGEiDQopDQpgYGANCg0Kbm93IGxldCdzIG1lcmdlIHdpdGggc29tZSBzcGVuZGluZyBkYXRhIGFuZCBmaWx0ZXIuDQp0aGlzIGlzIHRoZSBraW5kIG9mIG1lcmdlIHRoYXQgd2lsbCBuZWVkIHRvIGJlIG1hZGUgaW4gdGhlIGFwcC4NCnVzZXJzIHdpbGwgc2VsZWN0IGd3cCB2ZXJzaW9uIGFuZCAoZXZlbnR1YWxseSkgaW1wYWN0IGNhdGVnb3J5DQoNCmBgYHtyfQ0KIyANCnRlc3RERiA8LQ0KICBsZWZ0X2pvaW4oDQogICAgZXhhbXBsZVNwZW5kaW5nRGF0YTIsDQogICAgaW1wYWN0SW50ZW5zaXRpZXNXaXRoR1dQdmVyc2lvbnMsDQogICAgYnk9ImJlYUNvZGUiDQogICkgJT4lDQogIGZpbHRlcigNCiAgICBpbXBhY3RDYXRlZ29yeT09IkdIRyBlbWlzc2lvbnMiICYgDQogICAgZ3dwVmVyc2lvbiAlaW4lICJJUENDIEFSNCAxMDAiDQogICkgJT4lDQogIG11dGF0ZSgNCiAgICBpbXBhY3Q9dXNlclNwZW5kaW5nKmltcEZhY3Rvcipnd3AsDQogICAgYWN0dWFsU3BlbmRpbmc9aWZlbHNlKHN1YnN0YW5jZT09ImNhcmJvbiBkaW94aWRlIiwgdXNlclNwZW5kaW5nLCAwKQ0KICApDQpgYGANCg0Kbm93IGxldCdzIHN1bSBpbXBhY3RzIGJ5IGJlYU5hbWUgYW5kIGJ5IHVzZXJDYXRlZ29yeQ0KDQpgYGB7cn0NCnRlc3RERjIgPC0NCiAgdGVzdERGICU+JQ0KICBncm91cF9ieShpbXBhY3RDYXRlZ29yeSwgaW1wYWN0VW5pdHMsIGJlYU5hbWUpICU+JQ0KICBzdW1tYXJpc2UoDQogICAgdXNlclNwZW5kaW5nPXN1bShhY3R1YWxTcGVuZGluZyksDQogICAgaW1wYWN0PXN1bShpbXBhY3QpDQogICkNCmthYmxlKHRlc3RERjIpDQpgYGANCmFuZA0KDQpgYGB7cn0NCnRlc3RERjMgPC0NCiAgdGVzdERGICU+JQ0KICBncm91cF9ieShpbXBhY3RDYXRlZ29yeSwgaW1wYWN0VW5pdHMsIHVzZXJDYXRlZ29yeSkgJT4lDQogIHN1bW1hcmlzZSgNCiAgICB1c2VyU3BlbmRpbmc9c3VtKGFjdHVhbFNwZW5kaW5nKSwNCiAgICBpbXBhY3Q9c3VtKGltcGFjdCkNCiAgKQ0Ka2FibGUodGVzdERGMykNCmBgYA0Kb2ssIGkgaGF2ZSBwcmV2aWV3ZWQgdGhlIHByb2Nlc3NpbmchDQoNCm5leHQgc2Vzc2lvbiBJIHNob3VsZA0KDQoqIHByZXZpZXcgc29tZSBpbGx1c3RyYXRpb25zDQoqIHN0YXJ0IHB1dHRpbmcgdGhpcyBzdHVmZiBpbiB0aGUgYXBwDQoNCg0KDQoNCg==</div>
 
 
 
