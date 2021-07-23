@@ -4,6 +4,7 @@ library(shiny)
 library(tidyverse)
 library(viridis)
 library(ggthemes)
+library(readxl)
 
 # graphic conventions
 # create a custom theme for ggplots (assumes ggthemes is loaded)
@@ -14,7 +15,8 @@ theme_539 <- function() {
       panel.grid.major = element_blank(),
       axis.ticks = element_line(),
       plot.title.position = "plot",
-      plot.title = element_text(hjust=0)
+      plot.title = element_text(hjust=0),
+      axis.text = element_text(size=14)
     )
 }
 
@@ -26,17 +28,36 @@ householdSpending <-
 governmentProcurement <-
   readRDS("governmentProcurement.RData")
 
+# produce some lists
+# making some lists of categories by abundance.
+impactCategoryNames <-
+  impactIntensitiesWithGWPversions %>%
+    select(impactCategory) %>%
+    distinct() %>%
+    pull(impactCategory)
+
+gwpVersionNames <-
+  impactIntensitiesWithGWPversions %>%
+    select(gwpVersion) %>%
+    distinct() %>%
+    pull(gwpVersion)
+
 # USER INTERFACE
 ui <- navbarPage(
   title="SUPPLY CHAIN IMPACTS OF PURCHASING",
 
   # lay out the introduction page (no drop-down choices)
   tabPanel(
-    title="Introduction",
+    title="Choose or upload spending data",
     sidebarLayout(
       sidebarPanel(
         width=3,
-        "sidebar text",
+        "First, enter your spending in a file like this:",
+        downloadButton(
+          "statFile",
+          "download Excel template"
+        ),
+        "Then, upload your file",
         fileInput(
           "file1",
           "Choose XLSX or XLSX file",
@@ -51,7 +72,14 @@ ui <- navbarPage(
           "the uploadedData",
           tableOutput("theUploadedData"),
           "the impactsInDetail",
-          tableOutput("theImpactsInDetail")
+          tableOutput("theImpactsInDetail"),
+          "the user category names",
+          textOutput("theUserCategoryNames"),
+          "the BEA category names",
+          textOutput("theBeaCategoryNames"),
+          tableOutput("theUserCategoryChartData"),
+          "the user category impact chart title",
+          textOutput("theUserCategoryImpactChartTitle")
         )
       )
     ) # close sidebarlayout for introduction page
@@ -67,19 +95,29 @@ ui <- navbarPage(
       sidebarLayout(
         sidebarPanel(
           width=3,
-          h3("blah2")
+          radioButtons(
+            inputId = "impactCategoryChoice",
+            label = "choose an impact category",
+            choices=impactCategoryNames,
+            selected=impactCategoryNames[1]
+          ),
+          checkboxGroupInput(
+            inputId="gwpVersionChoice",
+            label="choose GWP version(s)",
+            choices=gwpVersionNames,
+            selected=gwpVersionNames[1]
+          )
         ), # close sidebar panel
         mainPanel(
           width=9,
           fluidRow(
             column(
               width=6,
-              "blah x",
               plotOutput("theUserCategorySpendingChart")
             ),
             column(
               width=6,
-              "blah3"
+              plotOutput("theUserCategoryImpactChart")
             )
           ) # close fluidrow
         ) #close mainpanel for sidebar layout
@@ -90,8 +128,14 @@ ui <- navbarPage(
 # end user interface definition
 
 # SERVER LOGIC
-# Define server logic required to draw a histogram
 server <- function(input, output) {
+
+  output$statFile <- downloadHandler(
+    filename="spending_file_template.xlsx",  # desired file name on client
+    content=function(con) {
+      file.copy("users_spending_data_blank.xlsx", con)
+    }
+  )
 
   myUploadedData <- reactive({
     inFile <- input$file1
@@ -123,7 +167,7 @@ server <- function(input, output) {
   })
 
   impactsInDetail <- reactive({
-    req(myUploadedData)
+    req(myUploadedData())
     # making the basic merge.
     left_join(
       myUploadedData(),
@@ -137,17 +181,7 @@ server <- function(input, output) {
   })
 
   output$theImpactsInDetail <- renderTable({
-    req(impactsInDetail())
     impactsInDetail()
-  })
-
-  # making some lists of categories by abundance.
-  impactCategoryNames <- reactive({
-    req(impactsInDetail())
-    impactsInDetail() %>%
-      select(impactCategory) %>%
-      distinct() %>%
-      pull(impactCategory)
   })
 
   userCategoryNames <- reactive({
@@ -159,6 +193,8 @@ server <- function(input, output) {
     pull(userCategory)
   })
 
+  output$theUserCategoryNames <- renderText(userCategoryNames())
+
   beaCategoryNames <- reactive({
     impactsInDetail() %>%
     group_by(beaCode, beaName) %>%
@@ -168,25 +204,16 @@ server <- function(input, output) {
     pull(beaName)
   })
 
-  gwpVersionNames <- reactive({
-    impactsInDetail() %>%
-    group_by(gwpVersion) %>%
-    summarise(
-      impact=sum(ifelse(impactCategory=="GHG emissions", impact, 0))
-    ) %>%
-    ungroup() %>%
-    arrange(desc(impact)) %>%
-    pull(gwpVersion)
-  })
+  output$theBeaCategoryNames <- renderText(beaCategoryNames())
 
   # data for summary charts by user category
   userCategoryChartData <- reactive({
     impactsInDetail() %>%
     filter(
       # later to be a selection in app...
-      impactCategory=="GHG emissions",
+      impactCategory==input$impactCategoryChoice,
       # later to be a multi checkbox selection in app...
-      gwpVersion %in% c("IPCC AR5 100", "IPCC AR5 20")
+      gwpVersion %in% input$gwpVersionChoice
     ) %>%
     group_by(impactCategory, impactUnits, gwpVersion, userCategory) %>%
     summarise(
@@ -198,9 +225,12 @@ server <- function(input, output) {
       userCategory=
         factor(userCategory, levels=rev(userCategoryNames())),
       gwpVersion=
-        factor(gwpVersion, levels=rev(gwpVersionNames()))
+        factor(gwpVersion, levels=rev(gwpVersionNames))
     )
   })
+
+  output$theUserCategoryChartData <-
+    renderTable(userCategoryChartData())
 
   # a title for the impact category.. to be reactive
   userCategoryImpactChartTitle <- reactive({
@@ -219,8 +249,11 @@ server <- function(input, output) {
     )
   })
 
+  output$theUserCategoryImpactChartTitle <-
+    renderText(userCategoryImpactChartTitle())
+
   # a chart object that is later going to be reactive
-  userCategorySpendingChartObject <- ({
+  userCategorySpendingChartObject <- reactive({
     ggplot()+
     theme_539()+
     ggtitle("Spending ($)")+
@@ -240,7 +273,29 @@ server <- function(input, output) {
 
   # output that chart
   output$theUserCategorySpendingChart =
-    renderPlot(userCategorySpendingChartObject(), height=500)
+    renderPlot(userCategorySpendingChartObject(), height=600)
+
+  # a chart object that is later going to be reactive
+  userCategoryImpactChartObject <- reactive({
+    ggplot()+
+    theme_539()+
+    ggtitle(userCategoryImpactChartTitle())+
+    geom_bar(
+      data=userCategoryChartData(),
+      aes(x=userCategory, y=impact, fill=gwpVersion),
+      position="dodge",
+      stat="identity"
+    )+
+    coord_flip()+
+    scale_fill_viridis(
+      begin=0.32, end=1, discrete=T, direction=-1,
+      option=sample(LETTERS[1:8],1),
+      guide = guide_legend(reverse = T)
+    )
+  })
+
+  output$theUserCategoryImpactChart <-
+    renderPlot(userCategoryImpactChartObject(), height=600)
 
 }
 

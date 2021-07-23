@@ -793,6 +793,10 @@ beaCategoryImpactChartObject
 
 ### Progress
 
-I've gotten to the point where data is being uploaded to the app.
-But it's coughing because something requires reactivity.  
-Gotta slow down and do it step by step.
+I've gotten an upload and download in the app.  It's basically working.
+Now I've got to 
+
+* make export functions (export chart data as excel, export charts themselves)
+* do the anti join thing so that people can see which spending entries don't match
+* clean up the layout
+* add a scatterchart of impact vs. spending (to find outliers)
