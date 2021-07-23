@@ -338,7 +338,7 @@ semi_join(
 
 # print out rows that don't match
 anti_join(
-  exampleSpendingData1,
+  exampleSpendingData2,
   okSpendingCats,
   by="beaCode"
 ) %>% 
@@ -363,6 +363,11 @@ Looks like I got that working.  I'm going to have to add a lot of features later
 
 but that can go later.
 
+```{r}
+# saving example datasets into the app directory
+saveRDS(exampleSpendingData2, "shinyApp/householdSpending.RData")
+saveRDS(exampleSpendingData1, "shinyApp/governmentProcurement.RData")
+```
 
 ### global warming potentials
 
@@ -390,11 +395,11 @@ for (i in 1:length(listOfGWPsheets)) {
       path=GWPfilespec,
       sheet=listOfGWPsheets[i],
       skip=22,
-      col_names=c("compound", "junk1", "junk2", "gwp", "junk3"),
+      col_names=c("compound", "junk1", "junk2", "gwp", "includeMe"),
       col_types=c("text", "numeric", "text", "numeric", "numeric")
     ) %>%
+    filter(gwp>0 & includeMe>0) %>%
     select(compound, gwp) %>%
-    filter(gwp>0) %>%
     mutate(
       gwpVersion=listOfGWPsheets[i],
       substance=
@@ -494,6 +499,10 @@ saveRDS(
   impactIntensitiesWithGWPversions,
   "intermediate_data/impactIntensitiesWithGWPversions.RData"
 )
+saveRDS(
+  impactIntensitiesWithGWPversions,
+  "shinyApp/impactIntensitiesWithGWPversions.RData"
+)
 ```
 
 now let's merge with some spending data and filter.
@@ -560,10 +569,6 @@ rm(
 )
 ```
 
-next session I should
-
-* preview some illustrations
-* start putting this stuff in the app
 
 
 ### Drafting illustrations for app
@@ -700,3 +705,94 @@ userCategoryImpactChartObject <-
   
 userCategoryImpactChartObject
 ```
+
+```{r}
+# a data frame that's later going to be reactive
+beaCategoryChartData <-
+  impactsInDetail %>%
+  filter(
+    # later to be a selection in app...
+    impactCategory=="GHG emissions", 
+    # later to be a multi checkbox selection in app...
+    gwpVersion %in% c("IPCC AR5 100", "IPCC AR5 20")
+  ) %>%
+  group_by(impactCategory, impactUnits, gwpVersion, beaName) %>%
+  summarise(
+    impact=sum(impact),
+    actualSpending=sum(actualSpending)
+  ) %>%
+  ungroup() %>%
+  mutate(
+    beaName=factor(beaName, levels=rev(beaCategoryNames)),
+#    userCategory=factor(userCategory, levels=rev(userCategoryNames)),
+    gwpVersion=factor(gwpVersion, levels=rev(gwpVersionNames))
+  )
+
+# a title for the impact category.. to be reactive
+beaCategoryImpactChartTitle <-
+  paste(
+    beaCategoryChartData %>%
+      select(impactCategory) %>%
+      pull(impactCategory) %>%
+      unique(),
+    " (",
+    beaCategoryChartData %>%
+      select(impactUnits) %>%
+      pull(impactUnits) %>%
+      unique(),
+    ")",
+    sep=""
+  )
+```
+now make a chart object and print it
+
+```{r}
+# a chart object that is later going to be reactive
+beaCategorySpendingChartObject <-
+  ggplot()+
+  theme_539()+
+  ggtitle("Spending ($)")+
+  geom_bar(
+    data=beaCategoryChartData,
+    aes(x=beaName, y=actualSpending, fill=gwpVersion),
+    position="dodge",
+    stat="identity"
+  )+
+  coord_flip()+
+  scale_fill_viridis(
+    begin=0.32, end=1, discrete=T, direction=-1,
+    option=sample(LETTERS[1:8],1),
+    guide=guide_legend(reverse=T)
+  )
+  
+beaCategorySpendingChartObject
+```
+now let's do the same thing for impacts.  however i need to get the impact name from a reactive object
+
+```{r}
+# a chart object that is later going to be reactive
+beaCategoryImpactChartObject <-
+  ggplot()+
+  theme_539()+
+  ggtitle(beaCategoryImpactChartTitle)+
+  geom_bar(
+    data=beaCategoryChartData,
+    aes(x=beaName, y=impact, fill=gwpVersion),
+    position="dodge",
+    stat="identity"
+  )+
+  coord_flip()+
+  scale_fill_viridis(
+    begin=0.32, end=1, discrete=T, direction=-1,
+    option=sample(LETTERS[1:8],1),
+    guide = guide_legend(reverse = T)
+  )
+  
+beaCategoryImpactChartObject
+```
+
+### Progress
+
+I've gotten to the point where data is being uploaded to the app.
+But it's coughing because something requires reactivity.  
+Gotta slow down and do it step by step.
