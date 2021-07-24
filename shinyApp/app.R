@@ -5,6 +5,7 @@ library(tidyverse)
 library(viridis)
 library(ggthemes)
 library(readxl)
+library(openxlsx)
 
 # graphic conventions
 # create a custom theme for ggplots (assumes ggthemes is loaded)
@@ -48,38 +49,45 @@ ui <- navbarPage(
 
   # lay out the introduction page (no drop-down choices)
   tabPanel(
-    title="Choose or upload spending data",
+    title="Upload spending data",
     sidebarLayout(
       sidebarPanel(
         width=3,
-        "First, enter your spending in a file like this:",
-        downloadButton(
-          "statFile",
-          "download Excel template"
+        h3("Instructions"),
+        fluidRow("1. enter your spending in a file like this:"),
+        fluidRow(" "),
+        fluidRow(
+          downloadButton(
+            "statFile",
+            "download Excel template"
+          ),
         ),
-        "Then, upload your file",
+        fluidRow(" "),
+        fluidRow("2. upload your spending file"),
+        fluidRow(" "),
         fileInput(
           "file1",
           "Choose XLSX or XLSX file",
           accept = c(".xls", ".xlsx")
-        )
+        ),
+        fluidRow(" "),
+        fluidRow("3. check for noncompatible codes and sum of spending at right"),
+        fluidRow(" "),
+        fluidRow("4. correct spending data file if necessary"),
+        fluidRow(" "),
+        fluidRow("5. when satisfied with spending file, move on to results")
       ),
       mainPanel(
         width=9,
-        title = "main panel title",
+        title = "Views of your uploaded data",
         fluidRow(
           align="center",
-          "the uploadedData",
+          h3("a sample of your uploadedData:"),
           tableOutput("theUploadedData"),
-          "the impactsInDetail",
-          tableOutput("theImpactsInDetail"),
-          "the user category names",
-          textOutput("theUserCategoryNames"),
-          "the BEA category names",
-          textOutput("theBeaCategoryNames"),
-          tableOutput("theUserCategoryChartData"),
-          "the user category impact chart title",
-          textOutput("theUserCategoryImpactChartTitle")
+          h3("the sum of spending with compatible codes:"),
+          textOutput("theTotalUploadedSpending"),
+          h3("lines that have noncompatible codes:"),
+          tableOutput("theSuspectData")
         )
       )
     ) # close sidebarlayout for introduction page
@@ -87,11 +95,11 @@ ui <- navbarPage(
 
   # lay out weights and impacts section
   navbarMenu(
-    title="By user category",
+    title="Spending and impact results by user category",
 
     # lay out totals by material page
     tabPanel(
-      title="blah",
+      title="Total spending and impacts",
       sidebarLayout(
         sidebarPanel(
           width=3,
@@ -106,6 +114,26 @@ ui <- navbarPage(
             label="choose GWP version(s)",
             choices=gwpVersionNames,
             selected=gwpVersionNames[1]
+          ),
+          fluidRow(
+            downloadButton(
+              outputId = "theUserCategorySpendingChartDL",
+              label = "download spending chart",
+              width = "100%"
+            )
+          ),
+          fluidRow(
+            downloadButton(
+              outputId = "theUserCategoryImpactChartDL",
+              label = "download impact chart",
+              width = "100%"
+            )
+          ),
+          fluidRow(
+            downloadButton(
+              outputId = "theDataDownload",
+              label = "download chart and source data"
+            )
           )
         ), # close sidebar panel
         mainPanel(
@@ -113,7 +141,7 @@ ui <- navbarPage(
           fluidRow(
             column(
               width=6,
-              plotOutput("theUserCategorySpendingChart")
+              fluidRow(plotOutput("theUserCategorySpendingChart"))
             ),
             column(
               width=6,
@@ -130,6 +158,8 @@ ui <- navbarPage(
 # SERVER LOGIC
 server <- function(input, output) {
 
+  # allow user to download a static Excel file that they
+  # can use as a template for their own data entry
   output$statFile <- downloadHandler(
     filename="spending_file_template.xlsx",  # desired file name on client
     content=function(con) {
@@ -137,6 +167,8 @@ server <- function(input, output) {
     }
   )
 
+  # allow user to upload an excel file with their own
+  # spending data
   myUploadedData <- reactive({
     inFile <- input$file1
     if (is.null(inFile)) return(NULL)
@@ -153,6 +185,7 @@ server <- function(input, output) {
     data
   })
 
+  # create a screen display of the user's uploaded data
   output$theUploadedData <- renderTable({
     file <- input$file1
     ext <- tools::file_ext(file$datapath)
@@ -160,11 +193,38 @@ server <- function(input, output) {
     validate(
       need(
         ext == "xls" | ext=="xlsx",
-        "Please upload an Excel file in the format suggested"
+        "Please upload an Excel file in the format of the template"
       )
     )
-    myUploadedData()
+    myUploadedData() %>% head(5)
   })
+
+  suspectRecords <- reactive({
+    req(myUploadedData())
+    anti_join(
+      myUploadedData(),
+      impactIntensitiesWithGWPversions,
+      by="beaCode"
+    )
+  })
+
+  output$theSuspectData <- renderTable({
+    suspectRecords()
+  })
+
+  totalUploadedSpending <- reactive({
+    req(myUploadedData())
+    semi_join(
+      myUploadedData(),
+      impactIntensitiesWithGWPversions,
+      by="beaCode"
+    ) %>%
+    summarise(userSpending=sum(userSpending)) %>%
+    pull()
+  })
+
+  output$theTotalUploadedSpending <-
+    renderText(totalUploadedSpending())
 
   impactsInDetail <- reactive({
     req(myUploadedData())
@@ -275,6 +335,20 @@ server <- function(input, output) {
   output$theUserCategorySpendingChart =
     renderPlot(userCategorySpendingChartObject(), height=600)
 
+  # make an image of the chart downloadable
+  output$theUserCategorySpendingChartDL <-
+    downloadHandler(
+      filename = "userCategorySpendingChartDL.png",
+      content = function(file) {
+        ggsave(
+          file,
+          plot = userCategorySpendingChartObject(),
+          device="png"
+        )
+      }
+    )
+
+
   # a chart object that is later going to be reactive
   userCategoryImpactChartObject <- reactive({
     ggplot()+
@@ -294,8 +368,69 @@ server <- function(input, output) {
     )
   })
 
+  # output that chart
   output$theUserCategoryImpactChart <-
     renderPlot(userCategoryImpactChartObject(), height=600)
+
+  # make an image of the chart downloadable
+  output$theUserCategoryImpactChartDL <-
+    downloadHandler(
+      filename = "userCategoryImpactChartDL.png",
+      content = function(file) {
+        ggsave(
+          file,
+          plot = userCategoryImpactChartObject(),
+          device="png"
+        )
+      }
+    )
+
+  output$theDataDownload <-
+    downloadHandler(
+      filename = function() {
+        paste("spendingAndImpacts", ".xlsx", sep = "")
+      },
+      content = function(file) {
+        myWorkbook <-
+          createWorkbook()
+        addWorksheet(
+          wb = myWorkbook, sheetName = "submitted spending"
+        )
+        writeDataTable(
+          wb = myWorkbook,
+          sheet = "submitted spending",
+          x = myUploadedData()
+        )
+        addWorksheet(
+          wb=myWorkbook, sheetName = "noncompatible records"
+        )
+        writeDataTable(
+          wb = myWorkbook,
+          sheet = "noncompatible records",
+          x = suspectRecords()
+        )
+        addWorksheet(
+          wb = myWorkbook, sheetName = "totals by user category"
+        )
+        writeDataTable(
+          wb = myWorkbook,
+          sheet = "totals by user category",
+          x = userCategoryChartData()
+        )
+        addWorksheet(
+          wb=myWorkbook, sheetName = "complete detail"
+        )
+        writeDataTable(
+          wb= myWorkbook,
+          sheet = "complete detail",
+          x = impactsInDetail()
+        )
+        saveWorkbook(
+          wb = myWorkbook,
+          file = file
+        )
+      }
+    )
 
 }
 
