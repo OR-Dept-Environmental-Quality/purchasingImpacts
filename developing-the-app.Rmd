@@ -499,6 +499,11 @@ saveRDS(
   impactIntensitiesWithGWPversions,
   "intermediate_data/impactIntensitiesWithGWPversions.RData"
 )
+write.csv(
+  impactIntensitiesWithGWPversions,
+  "intermediate_data/impactIntensitiesWithGWPversions.csv",
+  row.names=F
+)
 saveRDS(
   impactIntensitiesWithGWPversions,
   "shinyApp/impactIntensitiesWithGWPversions.RData"

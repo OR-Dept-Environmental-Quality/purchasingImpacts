@@ -1,7 +1,9 @@
 # SETUP
 # load packages
 library(shiny)
-library(tidyverse)
+library(dplyr)
+library(ggplot2)
+library(stringr)
 library(viridis)
 library(ggthemes)
 library(readxl)
